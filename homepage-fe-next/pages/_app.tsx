@@ -1,5 +1,9 @@
 
 import 'antd/dist/antd.css'
+import '@toast-ui/editor/dist/toastui-editor.css'
+import 'prismjs/themes/prism.css'
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
+
 import '@/styles/globals.css'
 import '@/styles/index.css'
 import type { AppProps } from 'next/app'
