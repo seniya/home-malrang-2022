@@ -1,21 +1,21 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator'
 
 export class UpdatePostDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+    title: string
 
   @IsString()
   @IsNotEmpty()
-  subject: string;
+    subject: string
 
   @IsString()
   @IsNotEmpty()
-  content: string;
+    content: string
 
   @IsString()
   @IsNotEmpty()
-  contentHtml: string;
+    contentHtml: string
 }
 
-export default UpdatePostDto;
+export default UpdatePostDto

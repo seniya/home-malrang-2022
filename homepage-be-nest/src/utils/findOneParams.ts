@@ -1,8 +1,8 @@
-import { IsNumberString } from 'class-validator';
+import { IsNumberString } from 'class-validator'
 
 class FindOneParams {
   @IsNumberString()
-  id: string;
+    id: string
 }
 
-export default FindOneParams;
+export default FindOneParams

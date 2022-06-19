@@ -1,4 +1,4 @@
-import User from '../../users/user.entity';
+import User from '../../users/user.entity'
 
 const mockedUser: User = {
   id: 1,
@@ -9,7 +9,7 @@ const mockedUser: User = {
   photo: '',
   termsAgree: true,
   approval: true,
-  posts: [],
-};
+  posts: []
+}
 
-export default mockedUser;
+export default mockedUser

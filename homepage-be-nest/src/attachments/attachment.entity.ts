@@ -5,59 +5,59 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import User from 'src/users/user.entity';
+  UpdateDateColumn
+} from 'typeorm'
+import User from 'src/users/user.entity'
 
 @Entity()
 class Attachment {
   @PrimaryGeneratedColumn('uuid')
-  public id: string;
+  public id: string
 
   @Column()
-  public originalname: string;
+  public originalname: string
 
   @Column()
-  public mimetype: string;
+  public mimetype: string
 
   @Column()
-  public destination: string;
+  public destination: string
 
   @Column()
-  public filename: string;
+  public filename: string
 
   @Column()
-  public path: string;
+  public path: string
 
   @Column()
-  public size: number;
+  public size: number
 
   @Column()
-  public uploadType: string;
+  public uploadType: string
 
   @Column()
-  public cntDown: number;
+  public cntDown: number
 
   @Column({ type: 'boolean' })
-  public readAll: boolean;
+  public readAll: boolean
 
   @Column({ type: 'boolean' })
-  public useAble: boolean;
+  public useAble: boolean
 
   @ManyToOne(() => User, (author: User) => author.posts)
-  public author?: User;
+  public author?: User
 
   @CreateDateColumn()
-  createdAt: Date;
+    createdAt: Date
 
   @UpdateDateColumn()
-  updatedAt: Date;
+    updatedAt: Date
 
   @DeleteDateColumn()
-  deletedAt: Date;
+    deletedAt: Date
 
   // @OneToOne(() => Post, (post: Post) => post.image)
   // public post: Post;
 }
 
-export default Attachment;
+export default Attachment

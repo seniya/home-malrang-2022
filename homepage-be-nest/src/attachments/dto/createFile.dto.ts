@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsNumber, IsBoolean } from 'class-validator';
+/* eslint-disable no-unused-vars */
+import { IsString, IsNotEmpty, IsNumber, IsBoolean } from 'class-validator'
 
 export enum EUploadType {
   file = 'file',
@@ -8,40 +9,40 @@ export enum EUploadType {
 export class CreateFileDto {
   @IsString()
   @IsNotEmpty()
-  originalname: string;
+    originalname: string
 
   @IsString()
   @IsNotEmpty()
-  mimetype: string;
+    mimetype: string
 
   @IsString()
   @IsNotEmpty()
-  destination: string;
+    destination: string
 
   @IsString()
   @IsNotEmpty()
-  filename: string;
+    filename: string
 
   @IsString()
   @IsNotEmpty()
-  path: string;
+    path: string
 
   @IsNumber()
   @IsNotEmpty()
-  size: number;
+    size: number
 
   @IsNumber()
-  cntDown: number;
+    cntDown: number
 
   @IsBoolean()
-  readAll: boolean;
+    readAll: boolean
 
   @IsBoolean()
-  useAble: boolean;
+    useAble: boolean
 
   @IsString()
   @IsNotEmpty()
-  uploadType: EUploadType;
+    uploadType: EUploadType
 }
 
-export default CreateFileDto;
+export default CreateFileDto

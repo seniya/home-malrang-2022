@@ -1,36 +1,36 @@
-import { Exclude } from 'class-transformer';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import Post from '../posts/post.entity';
+import { Exclude } from 'class-transformer'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import Post from '../posts/post.entity'
 
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id: number
 
   @Column({ unique: true })
-  public email: string;
+  public email: string
 
   @Column()
-  public name: string;
+  public name: string
 
   @Column()
   @Exclude()
-  public password: string;
+  public password: string
 
   @Column({ default: '3' })
-  public lv: number;
+  public lv: number
 
   @Column({ type: 'text', nullable: true })
-  public photo: string;
+  public photo: string
 
   @Column({ type: 'boolean' })
-  public termsAgree: boolean;
+  public termsAgree: boolean
 
   @Column({ type: 'boolean', default: true })
-  public approval: boolean;
+  public approval: boolean
 
   @OneToMany(() => Post, (post: Post) => post.author)
-  public posts?: Post[];
+  public posts?: Post[]
 }
 
-export default User;
+export default User

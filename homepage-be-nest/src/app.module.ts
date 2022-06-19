@@ -1,14 +1,13 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
-import { DatabaseModule } from './database/database.module';
-import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
-import { CategoriesModule } from './categories/categories.module';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { AttachmentsModule } from './attachments/attachments.module';
-import { PagemetaModule } from './pagemeta/pagemeta.module';
-import { EmployeesModule } from './employees/employees.module';
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import * as Joi from 'joi'
+import { DatabaseModule } from './database/database.module'
+import { UsersModule } from './users/users.module'
+import { PostsModule } from './posts/posts.module'
+import { CategoriesModule } from './categories/categories.module'
+import { AuthenticationModule } from './authentication/authentication.module'
+import { AttachmentsModule } from './attachments/attachments.module'
+import { PagemetaModule } from './pagemeta/pagemeta.module'
 
 @Module({
   imports: [
@@ -23,10 +22,10 @@ import { EmployeesModule } from './employees/employees.module';
         JWT_EXPIRATION_TIME: Joi.string().required(),
         UPLOAD_LOCATION: Joi.string().required(),
         FILE_SIZE: Joi.number().required(),
-        IMAGE_SIZE: Joi.number().required(),
+        IMAGE_SIZE: Joi.number().required()
       }),
       envFilePath: '.env',
-      isGlobal: true,
+      isGlobal: true
     }),
     DatabaseModule,
     UsersModule,
@@ -34,10 +33,9 @@ import { EmployeesModule } from './employees/employees.module';
     CategoriesModule,
     AuthenticationModule,
     AttachmentsModule,
-    PagemetaModule,
-    EmployeesModule,
+    PagemetaModule
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}

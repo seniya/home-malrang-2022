@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
   imports: [
@@ -14,10 +14,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('MYSQL_USER'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DB'),
+        // eslint-disable-next-line n/no-path-concat
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true,
-      }),
-    }),
-  ],
+        synchronize: true
+      })
+    })
+  ]
 })
 export class DatabaseModule {}
