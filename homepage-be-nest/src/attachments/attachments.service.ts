@@ -43,7 +43,8 @@ export class AttachmentsService {
   }
 
   async getFileById(id: string) {
-    const file = await this.filesRepository.findOne(id, { relations: ['author'] });
+    // const file = await this.filesRepository.findOne(id, { relations: ['author'] });
+    const file = await this.filesRepository.findOneBy({ id });
     if (file) {
       // const { path: fpath } = file;
       // const stream = fs.createReadStream(fpath);

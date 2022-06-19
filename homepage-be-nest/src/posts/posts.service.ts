@@ -25,7 +25,8 @@ export class PostsService {
   }
 
   async getPostById(id: number) {
-    const post = await this.postsRepository.findOne(id, { relations: ['author', 'categories', 'attachment'] });
+    // const post = await this.postsRepository.findOne(id, { relations: ['author', 'categories', 'attachment'] });
+    const post = await this.postsRepository.findOneBy({ id });
     if (post) {
       return post;
     }
@@ -44,7 +45,8 @@ export class PostsService {
 
   async updatePost(id: number, post: UpdatePostDto) {
     await this.postsRepository.save(post);
-    const updatedPost = await this.postsRepository.findOne(id, { relations: ['author', 'categories', 'attachment'] });
+    // const updatedPost = await this.postsRepository.findOne(id, { relations: ['author', 'categories', 'attachment'] });
+    const updatedPost = await this.postsRepository.findOneBy({ id });
     if (updatedPost) {
       return updatedPost;
     }
