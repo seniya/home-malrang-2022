@@ -107,3 +107,5 @@ uploads
 
 # 환경설정파일
 .env
+
+package-lock.json
