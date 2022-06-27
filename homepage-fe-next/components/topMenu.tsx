@@ -12,7 +12,8 @@ const items = [
     label: 'sub menu',
     key: 'submenu',
     children: [{ label: 'item 3', key: 'submenu-item-1' }]
-  }
+  },
+  { label: 'login', key: 'login' }
 ]
 
 const TopMenu: NextPage = () => {
