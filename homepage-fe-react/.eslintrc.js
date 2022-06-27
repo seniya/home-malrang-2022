@@ -20,5 +20,9 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    'vue/multi-word-component-names': 'off',
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-uses-react': 0,
+    'no-unused-vars': 'warn'
   }
 }

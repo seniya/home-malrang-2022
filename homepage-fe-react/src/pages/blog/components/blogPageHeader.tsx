@@ -1,75 +1,77 @@
 import { Button, Modal, PageHeader, message } from 'antd'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
-import { RootState } from '../../../store/configureStore'
-import postModule from '../../../store/modules/post'
+
+// import { useDispatch, useSelector } from 'react-redux'
+// import useReactRouter from 'use-react-router'
+// import { RootState } from '../../../store/configureStore'
+// import postModule from '../../../store/modules/post'
+
 function BlogPageHeader () {
-  const { location } = useReactRouter<any>()
+  // const { location } = useReactRouter<any>()
   // console.log({ history, location, match });
   const { pathname } = location
   // console.log('pathname : ', pathname);
   // console.log('pathname.indexOf /blogs/read : ', pathname.indexOf('/blogs/read'));
 
-  const renderPageHeader = () => {
-    const dispatch = useDispatch()
-    const postState = useSelector((store: RootState) => store.post.postReducer)
-    const userState = useSelector((store: RootState) => store.user.userReducer)
-    const { isDoneRemovePost, errorRemovePost } = postState
-    const { token } = userState
-    console.log('BlogPageHeader token : ', token)
+  // const renderPageHeader = () => {
+  //   const dispatch = useDispatch()
+  //   const postState = useSelector((store: RootState) => store.post.postReducer)
+  //   const userState = useSelector((store: RootState) => store.user.userReducer)
+  //   const { isDoneRemovePost, errorRemovePost } = postState
+  //   const { token } = userState
+  //   console.log('BlogPageHeader token : ', token)
 
-    const reqRemovePost = (id: string) => {
-      dispatch(postModule.actions.REMOVE_POST_REQUEST(id))
-    }
+  //   const reqRemovePost = (id: string) => {
+  //     dispatch(postModule.actions.REMOVE_POST_REQUEST(id))
+  //   }
 
-    const history = useNavigate()
-    useEffect(() => {
-      if (isDoneRemovePost) {
-        message.success('성공적')
-        history('/blogs')
-      }
-      if (errorRemovePost) {
-        message.error(errorRemovePost)
-      }
-      return () => {
-        dispatch(postModule.actions.REMOVE_POST_RESET())
-      }
-    }, [isDoneRemovePost, errorRemovePost])
+  const history = useNavigate()
+  // useEffect(() => {
+  //   if (isDoneRemovePost) {
+  //     message.success('성공적')
+  //     history('/blogs')
+  //   }
+  //   if (errorRemovePost) {
+  //     message.error(errorRemovePost)
+  //   }
+  //   return () => {
+  //     dispatch(postModule.actions.REMOVE_POST_RESET())
+  //   }
+  // }, [isDoneRemovePost, errorRemovePost])
 
-    const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
-    const showModal = () => {
-      setIsModalVisible(true)
-    }
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
 
-    const handleOk = () => {
-      const pathnameSplit = pathname.split('/')
-      const id = pathnameSplit[pathnameSplit.length - 1]
-      setIsModalVisible(false)
-      reqRemovePost(id)
-    }
+  const handleOk = () => {
+    const pathnameSplit = pathname.split('/')
+    const id = pathnameSplit[pathnameSplit.length - 1]
+    setIsModalVisible(false)
+    // reqRemovePost(id)
+  }
 
-    const handleCancel = () => {
-      setIsModalVisible(false)
-    }
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
 
-    if (pathname === '/blogs') {
-      return (
+  if (pathname === '/blogs') {
+    return (
         <PageHeader
           ghost={false}
           title="Blog"
           subTitle="목록 페이지"
           extra={[
-            <Button key="/blogs/create" type="primary" disabled={!token}>
+            <Button key="/blogs/create" type="primary" disabled={false}>
               <Link to={'/blogs/create'}>작성</Link>
             </Button>
           ]}
         ></PageHeader>
-      )
-    } else if (pathname === '/blogs/create') {
-      return (
+    )
+  } else if (pathname === '/blogs/create') {
+    return (
         <PageHeader
           ghost={false}
           title="Blog"
@@ -80,11 +82,11 @@ function BlogPageHeader () {
             </Button>
           ]}
         ></PageHeader>
-      )
-    } else if (pathname.indexOf('/blogs/read') > -1) {
-      const pathnameSplit = pathname.split('/')
-      const id = pathnameSplit[pathnameSplit.length - 1]
-      return (
+    )
+  } else if (pathname.indexOf('/blogs/read') > -1) {
+    const pathnameSplit = pathname.split('/')
+    const id = pathnameSplit[pathnameSplit.length - 1]
+    return (
         <>
           <PageHeader
             ghost={false}
@@ -94,7 +96,7 @@ function BlogPageHeader () {
               <Button key="/blogs">
                 <Link to={'/blogs'}>리스트</Link>
               </Button>,
-              <Button key="/blogs/update" type="primary" disabled={!token}>
+              <Button key="/blogs/update" type="primary" disabled={false}>
                 <Link to={`/blogs/update/${id}`}>수정</Link>
               </Button>,
               <Button
@@ -102,7 +104,7 @@ function BlogPageHeader () {
                 type="primary"
                 danger
                 onClick={showModal}
-                disabled={!token}
+                disabled={false}
               >
                 삭제
               </Button>
@@ -117,11 +119,11 @@ function BlogPageHeader () {
             해당 컨텐츠를 삭제하시겠습니까?
           </Modal>
         </>
-      )
-    } else if (pathname.indexOf('/blogs/update') > -1) {
-      const pathnameSplit = pathname.split('/')
-      const id = pathnameSplit[pathnameSplit.length - 1]
-      return (
+    )
+  } else if (pathname.indexOf('/blogs/update') > -1) {
+    const pathnameSplit = pathname.split('/')
+    const id = pathnameSplit[pathnameSplit.length - 1]
+    return (
         <>
           <PageHeader
             ghost={false}
@@ -137,11 +139,8 @@ function BlogPageHeader () {
             ]}
           ></PageHeader>
         </>
-      )
-    }
+    )
   }
-
-  return <>{renderPageHeader()}</>
 }
 
 export default BlogPageHeader

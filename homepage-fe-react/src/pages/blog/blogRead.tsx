@@ -1,42 +1,43 @@
 import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store/configureStore'
-import postModule from '../../store/modules/post'
 import { useEffect, useState } from 'react'
-import Viewer from './components/blogViewer'
 import { Image, Skeleton } from 'antd'
-import BlogComments from './components/blogComment'
+import BlogComments from '@/pages/blog/components/blogComment'
+
+// import { useDispatch, useSelector } from 'react-redux'
+// import { RootState } from '../../store/configureStore'
+// import postModule from '../../store/modules/post'
+// import Viewer from './components/blogViewer'
 
 function BlogRead () {
   const { id } = useParams<{ id: string }>()
-  const dispatch = useDispatch()
-  const postState = useSelector((store: RootState) => store.post.postReducer)
-  const { post, isDoneReadPost } = postState
 
-  const reqReadPost = (id: string) => {
-    dispatch(postModule.actions.READ_POST_REQUEST(id))
-  }
+  // const dispatch = useDispatch()
+  // const postState = useSelector((store: RootState) => store.post.postReducer)
+  // const { post, isDoneReadPost } = postState
 
-  useEffect(() => {
-    reqReadPost(id)
-    return () => {
-      dispatch(postModule.actions.READ_POST_RESET())
-      dispatch(postModule.actions.REMOVE_POST_RESET())
-    }
-  }, [])
+  // const reqReadPost = (id: string) => {
+  //   dispatch(postModule.actions.READ_POST_REQUEST(id))
+  // }
+  // useEffect(() => {
+  //   reqReadPost(id)
+  //   return () => {
+  //     dispatch(postModule.actions.READ_POST_RESET())
+  //     dispatch(postModule.actions.REMOVE_POST_RESET())
+  //   }
+  // }, [])
 
-  const [content, setContent] = useState<any>()
+  // const [content, setContent] = useState<any>()
 
-  useEffect(() => {
-    if (isDoneReadPost) {
-      const parseContent = JSON.parse(post?.content || '{}')
-      setContent(parseContent)
-    }
-  }, [isDoneReadPost])
+  // useEffect(() => {
+  //   if (isDoneReadPost) {
+  //     const parseContent = JSON.parse(post?.content || '{}')
+  //     setContent(parseContent)
+  //   }
+  // }, [isDoneReadPost])
 
   return (
     <>
-      {isDoneReadPost && content && post?.attachment !== null
+      {/* {isDoneReadPost && content && post?.attachment !== null
         ? (
         <div style={{ padding: '50px' }}>
           <Image
@@ -49,7 +50,8 @@ function BlogRead () {
         : (
         <span></span>
           )}
-      {isDoneReadPost && content ? <Viewer editorData={content} /> : <Skeleton active />}
+      {isDoneReadPost && content ? <Viewer editorData={content} /> : <Skeleton active />} */}
+      <p>viewer</p>
       <BlogComments />
     </>
   )

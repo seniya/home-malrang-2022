@@ -1,5 +1,5 @@
 import { Image } from 'antd'
-import homepageImage from '../assets/images/homepage.png'
+import homepageImage from '@/assets/images/homepage.png'
 
 function About () {
   return (

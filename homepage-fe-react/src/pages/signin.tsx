@@ -1,10 +1,10 @@
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { RootState } from '../store/configureStore'
-import userModule from '../store/modules/user'
+// import { RootState } from '../store/configureStore'
+// import userModule from '../store/modules/user'
 
 const layout = {
   labelCol: { span: 4 },
@@ -16,25 +16,27 @@ const tailLayout = {
 
 function SignIn () {
   const history = useNavigate()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  const userState = useSelector((store: RootState) => store.user.userReducer)
-  // const { isLoading, isDone: isSigninDone, error: isSigninError, user, token } = userState;
-  const { isLoading, token } = userState
+  // const userState = useSelector((store: RootState) => store.user.userReducer)
+  // // const { isLoading, isDone: isSigninDone, error: isSigninError, user, token } = userState;
+  // const { isLoading, token } = userState
+  const isLoading = false
+  const token = ''
 
-  const fetchSignin = (values: any) => {
-    // console.log('fetchSignin signinSlice : ', signinSlice);
-    dispatch(
-      userModule.actions.SIGN_IN_REQUEST({
-        email: values.email,
-        password: values.password
-      })
-    )
-  }
+  // const fetchSignin = (values: any) => {
+  //   // console.log('fetchSignin signinSlice : ', signinSlice);
+  //   dispatch(
+  //     userModule.actions.SIGN_IN_REQUEST({
+  //       email: values.email,
+  //       password: values.password
+  //     })
+  //   )
+  // }
 
   const onFinish = (values: any) => {
     console.log('onFinish Success:', values)
-    fetchSignin(values)
+    // fetchSignin(values)
   }
 
   const onFinishFailed = (errorInfo: any) => {

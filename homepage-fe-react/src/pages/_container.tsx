@@ -1,5 +1,5 @@
-import { Switch, Route, Link, useLocation } from 'react-router-dom'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
+import { lazy, Suspense, useEffect } from 'react'
 import { Button, Layout, Menu, Tooltip } from 'antd'
 import {
   HomeOutlined,
@@ -8,37 +8,34 @@ import {
   SettingOutlined,
   LogoutOutlined
 } from '@ant-design/icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/configureStore'
-import userModule from '../store/modules/user'
 import Breadcrumbs from './components/breadcrumb'
 
-const Home = lazy(() => import('./home'))
-const About = lazy(() => import('./about'))
-const SignIn = lazy(() => import('./signin'))
-const Blog = lazy(() => import('./blog/_blog.container'))
-const SignUp = lazy(() => import('./signup'))
-const Toys = lazy(() => import('./toys'))
+const Home = lazy(() => import('@/pages/home'))
+const About = lazy(() => import('@/pages/about'))
+const SignIn = lazy(() => import('@/pages/signin'))
+const Blog = lazy(() => import('@/pages/blog/_blog.container'))
+const SignUp = lazy(() => import('@/pages/signup'))
+const Toys = lazy(() => import('@/pages/toys'))
 
 const { Header, Content, Footer } = Layout
 const { SubMenu } = Menu
 
 function Container () {
-  const dispatch = useDispatch()
-  const getUserInfo = () => {
-    dispatch(userModule.actions.GET_USER_REQUEST())
-  }
+  // const dispatch = useDispatch()
+  // const getUserInfo = () => {
+  //   dispatch(userModule.actions.GET_USER_REQUEST())
+  // }
 
-  useEffect(() => {
-    getUserInfo()
-  }, [])
+  // useEffect(() => {
+  //   getUserInfo()
+  // }, [])
 
-  const userState = useSelector((store: RootState) => store.user.userReducer)
-  const { user, token } = userState
+  // const userState = useSelector((store: RootState) => store.user.userReducer)
+  // const { user, token } = userState
 
   const location = useLocation()
   const onClickBtnSignout = () => {
-    dispatch(userModule.actions.SIGN_OUT())
+    // dispatch(userModule.actions.SIGN_OUT())
   }
 
   const renderBtnLogout = () => {
@@ -66,9 +63,10 @@ function Container () {
         >
           {
             <div className="logo">
-              <span>Hello. </span>
+              <span>손님 안녕</span>
+              {/* <span>Hello. </span>
               {<span>{token ? `${user.name} 님` : '손님'}</span>}
-              {token ? renderBtnLogout() : ''}
+              {token ? renderBtnLogout() : ''} */}
             </div>
           }
           <Menu theme="dark" mode="horizontal" selectedKeys={[location.pathname]}>
@@ -103,14 +101,14 @@ function Container () {
           >
             {/* <div>메인 컨테이너</div> */}
             <Suspense fallback={<div>Loading...</div>}>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/blogs" component={Blog} />
-                <Route path="/toys" component={Toys} />
-                <Route path="/sign-up" component={SignUp} />
-                <Route path="/sign-in" component={SignIn} />
-              </Switch>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blogs" element={<Blog />} />
+                <Route path="/toys" element={<Toys />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
+              </Routes>
             </Suspense>
           </div>
         </Content>

@@ -1,4 +1,4 @@
-import HomeCal from './components/homeCal'
+import HomeCal from '@/pages/components/homeCal'
 
 function Home () {
   return (

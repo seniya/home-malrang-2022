@@ -1,9 +1,9 @@
 import { Breadcrumb } from 'antd'
-import useReactRouter from 'use-react-router'
+// import useReactRouter from 'use-react-router'
 
 function Breadcrumbs () {
-  const { history, location, match } = useReactRouter<any>()
-  console.log({ history, location, match })
+  // const { history, location, match } = useReactRouter<any>()
+  // console.log({ history, location, match })
   const { pathname } = location
   console.log('pathname : ', pathname)
 

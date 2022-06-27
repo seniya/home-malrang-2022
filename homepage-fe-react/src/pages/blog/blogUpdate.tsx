@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import _ from 'lodash'
 
 import {
@@ -17,72 +16,74 @@ import {
 } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { RootState } from '../../store/configureStore'
-import postModule from '../../store/modules/post'
-import { IPostRequest } from '../../store/modules/post/post.interface'
-import Editor from './components/blogEditor'
-import { CATEGORY_ITEMS, CATEGORY_NAMES } from '../../utils/constant'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { RootState } from '../../store/configureStore'
+// import postModule from '../../store/modules/post'
+// import { IPostRequest } from '../../store/modules/post/post.interface'
+// import Editor from './components/blogEditor'
+
+import { CATEGORY_ITEMS, CATEGORY_NAMES } from '@/utils/constant'
 
 function BlogUpdate () {
   const { id } = useParams<{ id: string }>()
 
-  const postState = useSelector((store: RootState) => store.post.postReducer)
-  const {
-    post,
-    isDoneReadPost,
-    isLoadingUpdatePost,
-    isDoneUpdatePost,
-    errorUpdatePost
-  } = postState
+  // const postState = useSelector((store: RootState) => store.post.postReducer)
+  // const {
+  //   post,
+  //   isDoneReadPost,
+  //   isLoadingUpdatePost,
+  //   isDoneUpdatePost,
+  //   errorUpdatePost
+  // } = postState
 
-  const reqReadPost = (id: string) => {
-    dispatch(postModule.actions.READ_POST_REQUEST(id))
-  }
+  // const reqReadPost = (id: string) => {
+  //   dispatch(postModule.actions.READ_POST_REQUEST(id))
+  // }
 
-  useEffect(() => {
-    reqReadPost(id as string)
-    return () => {
-      dispatch(postModule.actions.READ_POST_RESET())
-    }
-  }, [])
+  // useEffect(() => {
+  //   reqReadPost(id as string)
+  //   return () => {
+  //     dispatch(postModule.actions.READ_POST_RESET())
+  //   }
+  // }, [])
 
-  const [content, setContent] = useState<any>()
+  // const [content, setContent] = useState<any>()
 
-  useEffect(() => {
-    if (isDoneReadPost) {
-      const parseContent = JSON.parse(post?.content || '')
-      console.log('parseContent : ', parseContent)
-      setContent(parseContent)
+  // useEffect(() => {
+  //   if (isDoneReadPost) {
+  //     const parseContent = JSON.parse(post?.content || '')
+  //     console.log('parseContent : ', parseContent)
+  //     setContent(parseContent)
 
-      if (post?.attachment) {
-        const fileTemp = {
-          uid: post?.attachment.id,
-          name: post?.attachment.originalname,
-          status: 'done',
-          url: post?.attachment.download,
-          response: post?.attachment
-        }
-        updateFileList([fileTemp])
-      }
-    }
-  }, [isDoneReadPost])
+  //     if (post?.attachment) {
+  //       const fileTemp = {
+  //         uid: post?.attachment.id,
+  //         name: post?.attachment.originalname,
+  //         status: 'done',
+  //         url: post?.attachment.download,
+  //         response: post?.attachment
+  //       }
+  //       updateFileList([fileTemp])
+  //     }
+  //   }
+  // }, [isDoneReadPost])
 
   const history = useNavigate()
 
-  useEffect(() => {
-    if (isDoneUpdatePost) {
-      message.success('성공적')
-      history(`/blogs/read/${id}`)
-    }
-    if (errorUpdatePost) {
-      message.error(errorUpdatePost)
-    }
-    return () => {
-      dispatch(postModule.actions.UPDATE_POST_RESET())
-    }
-  }, [isDoneUpdatePost, errorUpdatePost])
+  // useEffect(() => {
+  //   if (isDoneUpdatePost) {
+  //     message.success('성공적')
+  //     history(`/blogs/read/${id}`)
+  //   }
+  //   if (errorUpdatePost) {
+  //     message.error(errorUpdatePost)
+  //   }
+  //   return () => {
+  //     dispatch(postModule.actions.UPDATE_POST_RESET())
+  //   }
+  // }, [isDoneUpdatePost, errorUpdatePost])
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [editor, setEditor] = useState<any>()
 
   const onReadyEditor_ = (editor_: any): void => {
@@ -96,43 +97,43 @@ function BlogUpdate () {
     }
   }, [])
 
-  const fetchPostData = async (values: any) => {
-    const content = await editor.saver.save()
-    const contentStr = JSON.stringify(content)
+  // const fetchPostData = async (values: any) => {
+  //   const content = await editor.saver.save()
+  //   const contentStr = JSON.stringify(content)
 
-    const reqPostData: IPostRequest = {
-      id: post?.id,
-      title: values.title,
-      desc: values.desc,
-      subject: values.subject || values.title,
-      subjectTitle: values.subjectTitle || values.title,
-      subjectOrder: values.subjectOrder || 1,
-      content: contentStr,
-      contentHtml: contentStr
-    }
-    if (fileList.length > 0) {
-      reqPostData.attachment = fileList[0].response.data
-    }
-    if (categories.length > 0) {
-      const categories_ = []
+  //   const reqPostData: IPostRequest = {
+  //     id: post?.id,
+  //     title: values.title,
+  //     desc: values.desc,
+  //     subject: values.subject || values.title,
+  //     subjectTitle: values.subjectTitle || values.title,
+  //     subjectOrder: values.subjectOrder || 1,
+  //     content: contentStr,
+  //     contentHtml: contentStr
+  //   }
+  //   if (fileList.length > 0) {
+  //     reqPostData.attachment = fileList[0].response.data
+  //   }
+  //   if (categories.length > 0) {
+  //     const categories_ = []
 
-      for (let i = 0; i < categories.length; i++) {
-        const cateName = categories[i]
-        const item = _.find(CATEGORY_ITEMS, { name: cateName })
-        if (item !== undefined) {
-          categories_.push(item)
-        }
-      }
-      reqPostData.categories = categories_
-    } else {
-      reqPostData.categories = [CATEGORY_ITEMS[0]]
-    }
-    dispatch(postModule.actions.UPDATE_POST_REQUEST(reqPostData))
-  }
+  //     for (let i = 0; i < categories.length; i++) {
+  //       const cateName = categories[i]
+  //       const item = _.find(CATEGORY_ITEMS, { name: cateName })
+  //       if (item !== undefined) {
+  //         categories_.push(item)
+  //       }
+  //     }
+  //     reqPostData.categories = categories_
+  //   } else {
+  //     reqPostData.categories = [CATEGORY_ITEMS[0]]
+  //   }
+  //   dispatch(postModule.actions.UPDATE_POST_REQUEST(reqPostData))
+  // }
 
   const onFinish = (values: any) => {
     console.log('onFinish Success:', values)
-    fetchPostData(values)
+    // fetchPostData(values)
   }
 
   const onFinishFailed = (errorInfo: any) => {
@@ -173,10 +174,12 @@ function BlogUpdate () {
   const handleChangeSelect = (selectedItems: string[]) => {
     updateCategories(selectedItems)
   }
+  const isDoneReadPost = true
 
   return (
     <>
-      {isDoneReadPost && content
+      {/* {isDoneReadPost && content */}
+      {isDoneReadPost
         ? (
         <Form
           labelCol={{ span: 6 }}
@@ -189,7 +192,7 @@ function BlogUpdate () {
             title="블로그 수정"
             style={{ width: '100%' }}
             actions={[
-              <Button type="primary" htmlType="submit" loading={isLoadingUpdatePost} key="index">
+              <Button type="primary" htmlType="submit" loading={false} key="index">
                 Submit
               </Button>
             ]}
@@ -197,7 +200,7 @@ function BlogUpdate () {
             <Form.Item
               label="제목 (Title)"
               name="title"
-              initialValue={post?.title}
+              // initialValue={post?.title}
               rules={[{ required: true, message: 'Please input Title!' }]}
             >
               <Input placeholder="input Title" />
@@ -205,20 +208,22 @@ function BlogUpdate () {
             <Form.Item
               label="설명 (Desc)"
               name="desc"
-              initialValue={post?.desc}
+              // initialValue={post?.desc}
               rules={[{ required: true, message: 'Please input desc!' }]}
             >
               <Input.TextArea placeholder="input Desc" autoSize={{ minRows: 3, maxRows: 5 }} />
             </Form.Item>
             <Collapse ghost>
               <Collapse.Panel header="주제 그룹 (Subject)" key="1">
-                <Form.Item label="주제 (Subject)" name="subject" initialValue={post?.subject}>
+                <Form.Item label="주제 (Subject)" name="subject"
+                  // initialValue={post?.subject}
+                  >
                   <Input placeholder="input Subject. 미입력시 제목" />
                 </Form.Item>
                 <Form.Item
                   label="소 제목 (Subject Title)"
                   name="subjectTitle"
-                  initialValue={post?.subjectTitle}
+                  // initialValue={post?.subjectTitle}
                 >
                   <Input placeholder="input Subject Title" />
                 </Form.Item>
@@ -226,7 +231,7 @@ function BlogUpdate () {
                   label="순번 (Subject Order)"
                   name="subjectOrder"
                   rules={[{ type: 'number', message: 'Please input type number!' }]}
-                  initialValue={post?.subjectOrder}
+                  // initialValue={post?.subjectOrder}
                 >
                   <InputNumber min={1} />
                 </Form.Item>
@@ -237,9 +242,9 @@ function BlogUpdate () {
                     mode="multiple"
                     style={{ width: '100%' }}
                     onChange={handleChangeSelect}
-                    defaultValue={
-                      post?.categories ? post?.categories.map((item: any) => item.name) : undefined
-                    }
+                    // defaultValue={
+                    //   post?.categories ? post?.categories.map((item: any) => item.name) : undefined
+                    // }
                   >
                     {filteredOptions.map((item) => (
                       <Select.Option key={item} value={item}>
@@ -257,7 +262,7 @@ function BlogUpdate () {
             </Collapse>
             ,
             <Card title="본문 (Content)" style={{ width: '100%' }}>
-              <Editor onReadyEditor={onReadyEditor_} data={content} />
+              {/* <Editor onReadyEditor={onReadyEditor_} data={content} /> */}
             </Card>
           </Card>
         </Form>
