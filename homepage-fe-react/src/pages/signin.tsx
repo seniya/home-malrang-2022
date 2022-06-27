@@ -1,50 +1,51 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { RootState } from '../store/configureStore';
-import userModule from '../store/modules/user';
+import { Form, Input, Button, Checkbox } from 'antd'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { RootState } from '../store/configureStore'
+import userModule from '../store/modules/user'
 
 const layout = {
   labelCol: { span: 4 },
-  wrapperCol: { span: 16 },
-};
+  wrapperCol: { span: 16 }
+}
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+  wrapperCol: { offset: 8, span: 16 }
+}
 
-function SignIn() {
-  const history = useHistory();
-  const dispatch = useDispatch();
+function SignIn () {
+  const history = useNavigate()
+  const dispatch = useDispatch()
 
-  const userState = useSelector((store: RootState) => store.user.userReducer);
-  //const { isLoading, isDone: isSigninDone, error: isSigninError, user, token } = userState;
-  const { isLoading, token } = userState;
+  const userState = useSelector((store: RootState) => store.user.userReducer)
+  // const { isLoading, isDone: isSigninDone, error: isSigninError, user, token } = userState;
+  const { isLoading, token } = userState
 
   const fetchSignin = (values: any) => {
     // console.log('fetchSignin signinSlice : ', signinSlice);
     dispatch(
       userModule.actions.SIGN_IN_REQUEST({
         email: values.email,
-        password: values.password,
-      }),
-    );
-  };
+        password: values.password
+      })
+    )
+  }
 
   const onFinish = (values: any) => {
-    console.log('onFinish Success:', values);
-    fetchSignin(values);
-  };
+    console.log('onFinish Success:', values)
+    fetchSignin(values)
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
   useEffect(() => {
     if (token) {
-      history.push('/');
+      history('/')
     }
-  }, [token]);
+  }, [token])
 
   // useEffect(() => {
   //   if (isSigninDone) {
@@ -54,8 +55,8 @@ function SignIn() {
   // const isLoading = false;
   return (
     <>
-      {/* 
-      <div>        
+      {/*
+      <div>
         <p>isLoading: {isLoading ? 'true' : 'false'}</p>
         <p>isDone: {isSigninDone ? 'true' : 'false'}</p>
         <p>error: {isSigninError}</p>
@@ -97,7 +98,7 @@ function SignIn() {
         </Form.Item>
       </Form>
     </>
-  );
+  )
 }
 
-export default SignIn;
+export default SignIn

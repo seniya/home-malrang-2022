@@ -1,54 +1,54 @@
-import { AxiosResponse } from 'axios';
-import { axiosInstance } from '../../../utils/axiosInstance';
-import { IAttachmentResponse } from './attachment.interface';
+import { AxiosResponse } from 'axios'
+import { axiosInstance } from '../../../utils/axiosInstance'
+import { IAttachmentResponse } from './attachment.interface'
 
-export async function apiGetAttachments() {
+export async function apiGetAttachments () {
   const response: AxiosResponse = await axiosInstance({
     method: 'GET',
-    url: '/attachments',
-  });
+    url: '/attachments'
+  })
   if (response.data?.result?.code === 'RS0000') {
-    return response.data;
+    return response.data
   } else {
-    throw new Error(response.data?.result?.message);
+    throw new Error(response.data?.result?.message)
   }
 }
 
-export async function apiAddAttachment(data: FormData) {
+export async function apiAddAttachment (data: FormData) {
   const response: AxiosResponse = await axiosInstance({
     method: 'POST',
     url: '/attachments',
-    data,
-  });
+    data
+  })
   if (response.data?.result?.code === 'RS0000') {
-    return response.data;
+    return response.data
   } else {
-    throw new Error(response.data?.result?.message);
+    throw new Error(response.data?.result?.message)
   }
 }
 
-export async function apiAddImage(data: FormData): Promise<IAttachmentResponse> {
+export async function apiAddImage (data: FormData): Promise<IAttachmentResponse> {
   const response: AxiosResponse = await axiosInstance({
     method: 'POST',
     url: '/attachments/image',
-    data,
-  });
+    data
+  })
   if (response.data?.result?.code === 'RS0000') {
-    return response.data;
+    return response.data
   } else {
-    throw new Error(response.data?.result?.message);
+    throw new Error(response.data?.result?.message)
   }
 }
 
-export async function apiAddFile(data: FormData): Promise<IAttachmentResponse> {
+export async function apiAddFile (data: FormData): Promise<IAttachmentResponse> {
   const response: AxiosResponse = await axiosInstance({
     method: 'POST',
     url: '/attachments/file',
-    data,
-  });
+    data
+  })
   if (response.data?.result?.code === 'RS0000') {
-    return response.data;
+    return response.data
   } else {
-    throw new Error(response.data?.result?.message);
+    throw new Error(response.data?.result?.message)
   }
 }

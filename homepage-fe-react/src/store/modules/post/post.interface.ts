@@ -1,5 +1,5 @@
-import { IAttachment } from '../attachment/attachment.interface';
-import { IUser } from '../user/user.interface';
+import { IAttachment } from '../attachment/attachment.interface'
+import { IUser } from '../user/user.interface'
 
 export interface IPost {
   id?: number;

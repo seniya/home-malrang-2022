@@ -1,19 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import 'antd/dist/antd.css';
-import './assets/css/app.scss';
-import App from './App';
-import { createBrowserHistory } from 'history';
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import 'antd/dist/antd.css'
+import './assets/css/app.scss'
+import App from './App'
+import { createBrowserHistory } from 'history'
 // import reportWebVitals from './reportWebVitals';
 
-import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
 
 // const initialState = window.__INITIAL_STATE__;
 
-const history = createBrowserHistory();
-const store = configureStore(undefined, history);
+const history = createBrowserHistory()
+const store = configureStore(undefined, history)
 
 ReactDOM.render(
   <BrowserRouter>
@@ -21,8 +20,8 @@ ReactDOM.render(
       <App />
     </Provider>
   </BrowserRouter>,
-  document.getElementById('root'),
-);
+  document.getElementById('root')
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

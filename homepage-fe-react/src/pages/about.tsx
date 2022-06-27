@@ -1,7 +1,7 @@
-import { Image } from 'antd';
-import homepageImage from '../assets/images/homepage.png';
+import { Image } from 'antd'
+import homepageImage from '../assets/images/homepage.png'
 
-function About() {
+function About () {
   return (
     <>
       <div style={{ textAlign: 'center' }}>
@@ -9,7 +9,7 @@ function About() {
       </div>
       <div></div>
     </>
-  );
+  )
 }
 
-export default About;
+export default About

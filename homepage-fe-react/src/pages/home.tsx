@@ -1,11 +1,11 @@
-import HomeCal from './components/homeCal';
+import HomeCal from './components/homeCal'
 
-function Home() {
+function Home () {
   return (
     <div>
       <HomeCal />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

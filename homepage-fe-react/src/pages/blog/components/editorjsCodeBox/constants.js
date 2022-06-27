@@ -35,6 +35,6 @@ module.exports = {
     toml: 'TOML, also INI',
     typescript: 'TypeScript',
     yaml: 'YAML',
-    plaintext: 'Plaintext',
-  },
-};
+    plaintext: 'Plaintext'
+  }
+}

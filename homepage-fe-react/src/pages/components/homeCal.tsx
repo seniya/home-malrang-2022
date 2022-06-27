@@ -1,17 +1,17 @@
-import { Col, Row, Space } from 'antd';
-import Text from 'antd/lib/typography/Text';
-import '../../assets/css/homeCal.scss';
+import { Col, Row, Space } from 'antd'
+import Text from 'antd/lib/typography/Text'
+import '../../assets/css/homeCal.scss'
 const renderCal = () => {
-  const lang = navigator.language;
-  const date = new Date();
-  const dayNumber = date.getDate();
+  const lang = navigator.language
+  const date = new Date()
+  const dayNumber = date.getDate()
   const dayName = date.toLocaleString(lang, {
-    weekday: 'long',
-  });
+    weekday: 'long'
+  })
   const monthName = date.toLocaleString(lang, {
-    month: 'long',
-  });
-  const year = date.getFullYear();
+    month: 'long'
+  })
+  const year = date.getFullYear()
 
   return (
     <>
@@ -37,11 +37,11 @@ const renderCal = () => {
         </Row>
       </div>
     </>
-  );
-};
-
-function homeCal() {
-  return <div>{renderCal()}</div>;
+  )
 }
 
-export default homeCal;
+function homeCal () {
+  return <div>{renderCal()}</div>
+}
+
+export default homeCal

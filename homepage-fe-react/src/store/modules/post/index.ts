@@ -1,9 +1,8 @@
-import reducer from './post.reducer';
-import saga from './post.saga';
-import { actions } from './post.reducer';
+import reducer, { actions } from './post.reducer'
+import saga from './post.saga'
 
 export default {
   reducer,
   saga,
-  actions,
-};
+  actions
+}

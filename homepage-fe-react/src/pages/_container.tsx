@@ -1,45 +1,45 @@
-import { Switch, Route, Link, useLocation } from 'react-router-dom';
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { Button, Layout, Menu, Tooltip } from 'antd';
+import { Switch, Route, Link, useLocation } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { Button, Layout, Menu, Tooltip } from 'antd'
 import {
   HomeOutlined,
   CoffeeOutlined,
   BulbOutlined,
   SettingOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/configureStore';
-import userModule from '../store/modules/user';
-import Breadcrumbs from './components/breadcrumb';
+  LogoutOutlined
+} from '@ant-design/icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../store/configureStore'
+import userModule from '../store/modules/user'
+import Breadcrumbs from './components/breadcrumb'
 
-const Home = lazy(() => import('./home'));
-const About = lazy(() => import('./about'));
-const SignIn = lazy(() => import('./signin'));
-const Blog = lazy(() => import('./blog/_blog.container'));
-const SignUp = lazy(() => import('./signup'));
-const Toys = lazy(() => import('./toys'));
+const Home = lazy(() => import('./home'))
+const About = lazy(() => import('./about'))
+const SignIn = lazy(() => import('./signin'))
+const Blog = lazy(() => import('./blog/_blog.container'))
+const SignUp = lazy(() => import('./signup'))
+const Toys = lazy(() => import('./toys'))
 
-const { Header, Content, Footer } = Layout;
-const { SubMenu } = Menu;
+const { Header, Content, Footer } = Layout
+const { SubMenu } = Menu
 
-function Container() {
-  const dispatch = useDispatch();
+function Container () {
+  const dispatch = useDispatch()
   const getUserInfo = () => {
-    dispatch(userModule.actions.GET_USER_REQUEST());
-  };
+    dispatch(userModule.actions.GET_USER_REQUEST())
+  }
 
   useEffect(() => {
-    getUserInfo();
-  }, []);
+    getUserInfo()
+  }, [])
 
-  const userState = useSelector((store: RootState) => store.user.userReducer);
-  const { user, token } = userState;
+  const userState = useSelector((store: RootState) => store.user.userReducer)
+  const { user, token } = userState
 
-  const location = useLocation();
+  const location = useLocation()
   const onClickBtnSignout = () => {
-    dispatch(userModule.actions.SIGN_OUT());
-  };
+    dispatch(userModule.actions.SIGN_OUT())
+  }
 
   const renderBtnLogout = () => {
     return (
@@ -54,8 +54,8 @@ function Container() {
           />
         </Tooltip>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -120,7 +120,7 @@ function Container() {
       </Layout>
       ,
     </>
-  );
+  )
 }
 
-export default Container;
+export default Container

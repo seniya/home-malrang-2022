@@ -1,4 +1,4 @@
-import ajax from '@codexteam/ajax';
+import ajax from '@codexteam/ajax'
 
 /**
  * Module for file uploading.
@@ -9,10 +9,10 @@ export default class Uploader {
    * @param {function} onUpload - callback for successful file upload
    * @param {function} onError - callback for uploading errors
    */
-  constructor({ config, onUpload, onError }) {
-    this.config = config;
-    this.onUpload = onUpload;
-    this.onError = onError;
+  constructor ({ config, onUpload, onError }) {
+    this.config = config
+    this.onUpload = onUpload
+    this.onError = onError
   }
 
   /**
@@ -20,25 +20,25 @@ export default class Uploader {
    * @fires ajax.transport()
    * @param {function} onPreview - callback fired when preview is ready
    */
-  uploadSelectedFile({ onPreview }) {
-    const authorization = 'Bearer ' + localStorage.getItem('MALRANG_TOKEN') || null;
+  uploadSelectedFile ({ onPreview }) {
+    const authorization = 'Bearer ' + localStorage.getItem('MALRANG_TOKEN') || null
     ajax
       .transport({
         headers: {
-          authorization: authorization,
+          authorization
         },
         url: this.config.endpoint,
         accept: this.config.types,
         beforeSend: () => onPreview(),
-        fieldName: this.config.field,
+        fieldName: this.config.field
       })
       .then((response) => {
-        this.onUpload(response);
+        this.onUpload(response)
       })
       .catch((error) => {
-        const message = error && error.message ? error.message : this.config.errorMessage;
+        const message = error && error.message ? error.message : this.config.errorMessage
 
-        this.onError(message);
-      });
+        this.onError(message)
+      })
   }
 }

@@ -1,8 +1,8 @@
-import { call, put, takeLatest, all, fork } from 'redux-saga/effects';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { apiAddPost, apiGetPost, apiGetPosts, apiRemovePost, apiUpdatePost } from './post.api';
-import { IPostRequest } from './post.interface';
-import { actions } from './post.reducer';
+import { call, put, takeLatest, all, fork } from 'redux-saga/effects'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { apiAddPost, apiGetPost, apiGetPosts, apiRemovePost, apiUpdatePost } from './post.api'
+import { IPostRequest } from './post.interface'
+import { actions } from './post.reducer'
 
 const {
   READ_POSTS_REQUEST,
@@ -19,80 +19,80 @@ const {
   UPDATE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
-  REMOVE_POST_FAILURE,
-} = actions;
+  REMOVE_POST_FAILURE
+} = actions
 
-function* getPosts() {
+function * getPosts () {
   try {
-    const responseData = yield call(apiGetPosts);
-    yield put({ type: READ_POSTS_SUCCESS.type, payload: responseData });
+    const responseData = yield call(apiGetPosts)
+    yield put({ type: READ_POSTS_SUCCESS.type, payload: responseData })
   } catch (e) {
-    yield put({ type: READ_POSTS_FAILURE.type, payload: e.message });
+    yield put({ type: READ_POSTS_FAILURE.type, payload: e.message })
   }
 }
 
-function* watchGetPosts() {
-  yield takeLatest(READ_POSTS_REQUEST.type, getPosts);
+function * watchGetPosts () {
+  yield takeLatest(READ_POSTS_REQUEST.type, getPosts)
 }
 
-function* getPost(action: PayloadAction<string>) {
+function * getPost (action: PayloadAction<string>) {
   try {
-    const responseData = yield call(apiGetPost, action.payload);
-    yield put({ type: READ_POST_SUCCESS.type, payload: responseData });
+    const responseData = yield call(apiGetPost, action.payload)
+    yield put({ type: READ_POST_SUCCESS.type, payload: responseData })
   } catch (e) {
-    yield put({ type: READ_POST_FAILURE.type, payload: e.message });
+    yield put({ type: READ_POST_FAILURE.type, payload: e.message })
   }
 }
 
-function* watchGetPost() {
-  yield takeLatest(READ_POST_REQUEST.type, getPost);
+function * watchGetPost () {
+  yield takeLatest(READ_POST_REQUEST.type, getPost)
 }
 
-function* addPost(action: PayloadAction<IPostRequest>) {
+function * addPost (action: PayloadAction<IPostRequest>) {
   try {
-    const responseData = yield call(apiAddPost, action.payload);
-    yield put({ type: ADD_POST_SUCCESS.type, payload: responseData });
+    const responseData = yield call(apiAddPost, action.payload)
+    yield put({ type: ADD_POST_SUCCESS.type, payload: responseData })
   } catch (e) {
-    yield put({ type: ADD_POST_FAILURE.type, payload: e.message });
+    yield put({ type: ADD_POST_FAILURE.type, payload: e.message })
   }
 }
 
-function* watchAddPost() {
-  yield takeLatest(ADD_POST_REQUEST.type, addPost);
+function * watchAddPost () {
+  yield takeLatest(ADD_POST_REQUEST.type, addPost)
 }
 
-function* updatePost(action: PayloadAction<IPostRequest>) {
+function * updatePost (action: PayloadAction<IPostRequest>) {
   try {
-    const responseData = yield call(apiUpdatePost, action.payload);
-    yield put({ type: UPDATE_POST_SUCCESS.type, payload: responseData });
+    const responseData = yield call(apiUpdatePost, action.payload)
+    yield put({ type: UPDATE_POST_SUCCESS.type, payload: responseData })
   } catch (e) {
-    yield put({ type: UPDATE_POST_FAILURE.type, payload: e.message });
+    yield put({ type: UPDATE_POST_FAILURE.type, payload: e.message })
   }
 }
 
-function* watchupdatePost() {
-  yield takeLatest(UPDATE_POST_REQUEST.type, updatePost);
+function * watchupdatePost () {
+  yield takeLatest(UPDATE_POST_REQUEST.type, updatePost)
 }
 
-function* removePost(action: PayloadAction<string>) {
+function * removePost (action: PayloadAction<string>) {
   try {
-    const responseData = yield call(apiRemovePost, action.payload);
-    yield put({ type: REMOVE_POST_SUCCESS.type, payload: responseData });
+    const responseData = yield call(apiRemovePost, action.payload)
+    yield put({ type: REMOVE_POST_SUCCESS.type, payload: responseData })
   } catch (e) {
-    yield put({ type: REMOVE_POST_FAILURE.type, payload: e.message });
+    yield put({ type: REMOVE_POST_FAILURE.type, payload: e.message })
   }
 }
 
-function* watchRemovePost() {
-  yield takeLatest(REMOVE_POST_REQUEST.type, removePost);
+function * watchRemovePost () {
+  yield takeLatest(REMOVE_POST_REQUEST.type, removePost)
 }
 
-export default function* saga() {
+export default function * saga () {
   yield all([
     fork(watchGetPosts),
     fork(watchGetPost),
     fork(watchAddPost),
     fork(watchupdatePost),
-    fork(watchRemovePost),
-  ]);
+    fork(watchRemovePost)
+  ])
 }

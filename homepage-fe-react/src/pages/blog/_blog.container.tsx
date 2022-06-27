@@ -1,13 +1,13 @@
-import { lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import BlogPageHeader from './components/blogPageHeader';
+import { lazy } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import BlogPageHeader from './components/blogPageHeader'
 
-const BlogList = lazy(() => import('./blogList'));
-const BlogCreate = lazy(() => import('./blogCreate'));
-const BlogUpdate = lazy(() => import('./blogUpdate'));
-const BlogRead = lazy(() => import('./blogRead'));
+const BlogList = lazy(() => import('./blogList'))
+const BlogCreate = lazy(() => import('./blogCreate'))
+const BlogUpdate = lazy(() => import('./blogUpdate'))
+const BlogRead = lazy(() => import('./blogRead'))
 
-function Blog() {
+function Blog () {
   return (
     <>
       {BlogPageHeader()}
@@ -20,7 +20,7 @@ function Blog() {
         </Switch>
       </div>
     </>
-  );
+  )
 }
 
-export default Blog;
+export default Blog

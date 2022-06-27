@@ -1,14 +1,14 @@
-import './index.css';
-import Uploader from './uploader';
-const LOADER_TIMEOUT = 500;
+import './index.css'
+import Uploader from './uploader'
+const LOADER_TIMEOUT = 500
 const Icon =
-  '<svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M4.109 2.08H2.942a.862.862 0 0 0-.862.862v8.116c0 .476.386.862.862.862h5.529a.862.862 0 0 0 .862-.862V7.695H4.11V2.08zm1.905.497v3.29h3.312l-3.312-3.29zM2.942 0h2.74c.326.02.566.076.719.165.153.09.484.413.992.973l3.21 3.346c.347.413.557.683.631.811.111.193.179.446.179.579v5.184A2.942 2.942 0 0 1 8.471 14H2.942A2.942 2.942 0 0 1 0 11.058V2.942A2.942 2.942 0 0 1 2.942 0z" fill-rule="nonzero"/></svg>';
+  '<svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M4.109 2.08H2.942a.862.862 0 0 0-.862.862v8.116c0 .476.386.862.862.862h5.529a.862.862 0 0 0 .862-.862V7.695H4.11V2.08zm1.905.497v3.29h3.312l-3.312-3.29zM2.942 0h2.74c.326.02.566.076.719.165.153.09.484.413.992.973l3.21 3.346c.347.413.557.683.631.811.111.193.179.446.179.579v5.184A2.942 2.942 0 0 1 8.471 14H2.942A2.942 2.942 0 0 1 0 11.058V2.942A2.942 2.942 0 0 1 2.942 0z" fill-rule="nonzero"/></svg>'
 const FileIcon =
-  '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40"><g fill="#A8ACB8" fill-rule="evenodd"><path fill-rule="nonzero" d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z"/><path d="M7 22h18v2H7zm0 4h18v2H7zm0 4h18v2H7z"/></g></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40"><g fill="#A8ACB8" fill-rule="evenodd"><path fill-rule="nonzero" d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z"/><path d="M7 22h18v2H7zm0 4h18v2H7zm0 4h18v2H7z"/></g></svg>'
 const CustomFileIcon =
-  '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40"><path d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z"/></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40"><path d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z"/></svg>'
 const DownloadIcon =
-  '<svg xmlns="http://www.w3.org/2000/svg" width="17pt" height="17pt" viewBox="0 0 17 17"><path d="M9.457 8.945V2.848A.959.959 0 0 0 8.5 1.89a.959.959 0 0 0-.957.957v6.097L4.488 5.891a.952.952 0 0 0-1.351 0 .952.952 0 0 0 0 1.351l4.687 4.688a.955.955 0 0 0 1.352 0l4.687-4.688a.952.952 0 0 0 0-1.351.952.952 0 0 0-1.351 0zM3.59 14.937h9.82a.953.953 0 0 0 .953-.957.952.952 0 0 0-.953-.953H3.59a.952.952 0 0 0-.953.953c0 .532.425.957.953.957zm0 0" fill-rule="evenodd"/></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" width="17pt" height="17pt" viewBox="0 0 17 17"><path d="M9.457 8.945V2.848A.959.959 0 0 0 8.5 1.89a.959.959 0 0 0-.957.957v6.097L4.488 5.891a.952.952 0 0 0-1.351 0 .952.952 0 0 0 0 1.351l4.687 4.688a.955.955 0 0 0 1.352 0l4.687-4.688a.952.952 0 0 0 0-1.351.952.952 0 0 0-1.351 0zM3.59 14.937h9.82a.953.953 0 0 0 .953-.957.952.952 0 0 0-.953-.953H3.59a.952.952 0 0 0-.953.953c0 .532.425.957.953.957zm0 0" fill-rule="evenodd"/></svg>'
 
 /**
  * @typedef {object} AttachesToolData
@@ -60,8 +60,8 @@ const DownloadIcon =
  * @property {AttachesToolConfig} config
  */
 export default class AttachesTool {
-  static get isReadOnlySupported() {
-    return true;
+  static get isReadOnlySupported () {
+    return true
   }
 
   /**
@@ -70,30 +70,30 @@ export default class AttachesTool {
    * @param {API} api
    * @param {boolean} readOnly - read-only mode flag
    */
-  constructor({ data, config, api, readOnly }) {
-    this.api = api;
-    this.readOnly = readOnly;
+  constructor ({ data, config, api, readOnly }) {
+    this.api = api
+    this.readOnly = readOnly
 
     this.nodes = {
       wrapper: null,
       button: null,
-      title: null,
-    };
+      title: null
+    }
 
     this._data = {
       file: {},
-      title: '',
-    };
+      title: ''
+    }
 
     this.config = {
       endpoint: config.endpoint || '',
       field: config.field || 'file',
       types: config.types || '*',
       buttonText: config.buttonText || 'Select file to upload',
-      errorMessage: config.errorMessage || 'File upload failed',
-    };
+      errorMessage: config.errorMessage || 'File upload failed'
+    }
 
-    this.data = data;
+    this.data = data
 
     /**
      * Module for files uploading
@@ -101,10 +101,10 @@ export default class AttachesTool {
     this.uploader = new Uploader({
       config: this.config,
       onUpload: (response) => this.onUpload(response),
-      onError: (error) => this.uploadingFailed(error),
-    });
+      onError: (error) => this.uploadingFailed(error)
+    })
 
-    this.enableFileUpload = this.enableFileUpload.bind(this);
+    this.enableFileUpload = this.enableFileUpload.bind(this)
   }
 
   /**
@@ -112,17 +112,17 @@ export default class AttachesTool {
    * icon - Tool icon's SVG
    * title - title to show in toolbox
    */
-  static get toolbox() {
+  static get toolbox () {
     return {
       icon: Icon,
-      title: 'Attaches',
-    };
+      title: 'Attaches'
+    }
   }
 
   /**
    * Tool's CSS classes
    */
-  get CSS() {
+  get CSS () {
     return {
       baseClass: this.api.styles.block,
       apiButton: this.api.styles.button,
@@ -138,14 +138,14 @@ export default class AttachesTool {
       size: 'cdx-attaches__size',
       downloadButton: 'cdx-attaches__download-button',
       fileInfo: 'cdx-attaches__file-info',
-      fileIcon: 'cdx-attaches__file-icon',
-    };
+      fileIcon: 'cdx-attaches__file-icon'
+    }
   }
 
   /**
    * Possible files' extension colors
    */
-  get EXTENSIONS() {
+  get EXTENSIONS () {
     return {
       doc: '#3e74da',
       docx: '#3e74da',
@@ -175,8 +175,8 @@ export default class AttachesTool {
       psd: '#388ae5',
       dmg: '#e26f6f',
       json: '#2988f0',
-      csv: '#3f9e64',
-    };
+      csv: '#3f9e64'
+    }
   }
 
   /**
@@ -184,47 +184,47 @@ export default class AttachesTool {
    * @param {HTMLElement} toolsContent
    * @return {AttachesToolData}
    */
-  save(toolsContent) {
+  save (toolsContent) {
     /**
      * If file was uploaded
      */
     if (this.pluginHasData()) {
-      const title = toolsContent.querySelector(`.${this.CSS.title}`).innerHTML;
+      const title = toolsContent.querySelector(`.${this.CSS.title}`).innerHTML
 
-      Object.assign(this.data, { title });
+      Object.assign(this.data, { title })
     }
 
-    return this.data;
+    return this.data
   }
 
   /**
    * Renders Block content
    * @return {HTMLDivElement}
    */
-  render() {
-    const holder = this.make('div', this.CSS.baseClass);
+  render () {
+    const holder = this.make('div', this.CSS.baseClass)
 
-    this.nodes.wrapper = this.make('div', this.CSS.wrapper);
+    this.nodes.wrapper = this.make('div', this.CSS.wrapper)
 
     if (this.pluginHasData()) {
-      this.showFileData();
+      this.showFileData()
     } else {
-      this.prepareUploadButton();
+      this.prepareUploadButton()
     }
 
-    holder.appendChild(this.nodes.wrapper);
+    holder.appendChild(this.nodes.wrapper)
 
-    return holder;
+    return holder
   }
 
   /**
    * Prepares button for file uploading
    */
-  prepareUploadButton() {
-    this.nodes.button = this.make('div', [this.CSS.apiButton, this.CSS.button]);
-    this.nodes.button.innerHTML = `${Icon} ${this.config.buttonText}`;
-    this.nodes.button.addEventListener('click', this.enableFileUpload);
-    this.nodes.wrapper.appendChild(this.nodes.button);
+  prepareUploadButton () {
+    this.nodes.button = this.make('div', [this.CSS.apiButton, this.CSS.button])
+    this.nodes.button.innerHTML = `${Icon} ${this.config.buttonText}`
+    this.nodes.button.addEventListener('click', this.enableFileUpload)
+    this.nodes.wrapper.appendChild(this.nodes.button)
   }
 
   /**
@@ -232,170 +232,170 @@ export default class AttachesTool {
    * Initiates click on the Select File button
    * @public
    */
-  appendCallback() {
-    this.nodes.button.click();
+  appendCallback () {
+    this.nodes.button.click()
   }
 
   /**
    * Checks if any of Tool's fields have data
    * @return {boolean}
    */
-  pluginHasData() {
+  pluginHasData () {
     return (
       this.data.title !== '' || Object.values(this.data.file).some((item) => item !== undefined)
-    );
+    )
   }
 
   /**
    * Allow to upload files on button click
    */
-  enableFileUpload() {
+  enableFileUpload () {
     this.uploader.uploadSelectedFile({
       onPreview: () => {
-        this.nodes.wrapper.classList.add(this.CSS.wrapperLoading, this.CSS.loader);
-      },
-    });
+        this.nodes.wrapper.classList.add(this.CSS.wrapperLoading, this.CSS.loader)
+      }
+    })
   }
 
   /**
    * File uploading callback
    * @param {UploadResponseFormat} response
    */
-  onUpload(response) {
-    const body = response.body;
+  onUpload (response) {
+    const body = response.body
 
     if (body.result.code === 'RS0000') {
-      const { download: url, originalname: name, size } = body.data;
+      const { download: url, originalname: name, size } = body.data
 
       this.data = {
         file: {
           url,
           extension: name.split('.').pop(),
           name,
-          size,
+          size
         },
-        title: name,
-      };
+        title: name
+      }
 
-      this.nodes.button.remove();
-      this.showFileData();
-      this.moveCaretToEnd(this.nodes.title);
-      this.nodes.title.focus();
-      this.removeLoader();
+      this.nodes.button.remove()
+      this.showFileData()
+      this.moveCaretToEnd(this.nodes.title)
+      this.nodes.title.focus()
+      this.removeLoader()
     } else {
-      this.uploadingFailed(this.config.errorMessage);
+      this.uploadingFailed(this.config.errorMessage)
     }
   }
 
   /**
    * Handles uploaded file's extension and appends corresponding icon
    */
-  appendFileIcon() {
-    const extension = this.data.file.extension || '';
-    const extensionColor = this.EXTENSIONS[extension];
+  appendFileIcon () {
+    const extension = this.data.file.extension || ''
+    const extensionColor = this.EXTENSIONS[extension]
 
     const fileIcon = this.make('div', this.CSS.fileIcon, {
-      innerHTML: extensionColor ? CustomFileIcon : FileIcon,
-    });
+      innerHTML: extensionColor ? CustomFileIcon : FileIcon
+    })
 
     if (extensionColor) {
-      fileIcon.style.color = extensionColor;
-      fileIcon.setAttribute('data-extension', extension);
+      fileIcon.style.color = extensionColor
+      fileIcon.setAttribute('data-extension', extension)
     }
 
-    this.nodes.wrapper.appendChild(fileIcon);
+    this.nodes.wrapper.appendChild(fileIcon)
   }
 
   /**
    * Removes tool's loader
    */
-  removeLoader() {
+  removeLoader () {
     setTimeout(
       () => this.nodes.wrapper.classList.remove(this.CSS.wrapperLoading, this.CSS.loader),
-      LOADER_TIMEOUT,
-    );
+      LOADER_TIMEOUT
+    )
   }
 
   /**
    * If upload is successful, show info about the file
    */
-  showFileData() {
-    this.nodes.wrapper.classList.add(this.CSS.wrapperWithFile);
+  showFileData () {
+    this.nodes.wrapper.classList.add(this.CSS.wrapperWithFile)
 
     const {
       file: { size, url },
-      title,
-    } = this.data;
+      title
+    } = this.data
 
-    this.appendFileIcon();
+    this.appendFileIcon()
 
-    const fileInfo = this.make('div', this.CSS.fileInfo);
+    const fileInfo = this.make('div', this.CSS.fileInfo)
 
     if (title) {
       this.nodes.title = this.make('div', this.CSS.title, {
-        contentEditable: !this.readOnly,
-      });
+        contentEditable: !this.readOnly
+      })
 
-      this.nodes.title.textContent = title;
-      fileInfo.appendChild(this.nodes.title);
+      this.nodes.title.textContent = title
+      fileInfo.appendChild(this.nodes.title)
     }
 
     if (size) {
-      let sizePrefix;
-      let formattedSize;
-      const fileSize = this.make('div', this.CSS.size);
+      let sizePrefix
+      let formattedSize
+      const fileSize = this.make('div', this.CSS.size)
 
       if (Math.log10(+size) >= 6) {
-        sizePrefix = 'MiB';
-        formattedSize = size / Math.pow(2, 20);
+        sizePrefix = 'MiB'
+        formattedSize = size / Math.pow(2, 20)
       } else {
-        sizePrefix = 'KiB';
-        formattedSize = size / Math.pow(2, 10);
+        sizePrefix = 'KiB'
+        formattedSize = size / Math.pow(2, 10)
       }
 
-      fileSize.textContent = formattedSize.toFixed(1);
-      fileSize.setAttribute('data-size', sizePrefix);
-      fileInfo.appendChild(fileSize);
+      fileSize.textContent = formattedSize.toFixed(1)
+      fileSize.setAttribute('data-size', sizePrefix)
+      fileInfo.appendChild(fileSize)
     }
 
-    this.nodes.wrapper.appendChild(fileInfo);
+    this.nodes.wrapper.appendChild(fileInfo)
 
     const downloadIcon = this.make('a', this.CSS.downloadButton, {
       innerHTML: DownloadIcon,
       href: url,
       target: '_blank',
-      rel: 'nofollow noindex noreferrer',
-    });
+      rel: 'nofollow noindex noreferrer'
+    })
 
-    this.nodes.wrapper.appendChild(downloadIcon);
+    this.nodes.wrapper.appendChild(downloadIcon)
   }
 
   /**
    * If file uploading failed, remove loader and show notification
    * @param {string} errorMessage -  error message
    */
-  uploadingFailed(errorMessage) {
+  uploadingFailed (errorMessage) {
     this.api.notifier.show({
       message: errorMessage,
-      style: 'error',
-    });
+      style: 'error'
+    })
 
-    this.removeLoader();
+    this.removeLoader()
   }
 
   /**
    * Return Attaches Tool's data
    * @return {AttachesToolData}
    */
-  get data() {
-    return this._data;
+  get data () {
+    return this._data
   }
 
   /**
    * Stores all Tool's data
    * @param {AttachesToolData} data
    */
-  set data({ file, title }) {
+  set data ({ file, title }) {
     this._data = Object.assign(
       {},
       {
@@ -403,25 +403,25 @@ export default class AttachesTool {
           url: (file && file.url) || this._data.file.url,
           name: (file && file.name) || this._data.file.name,
           extension: (file && file.extension) || this._data.file.extension,
-          size: (file && file.size) || this._data.file.size,
+          size: (file && file.size) || this._data.file.size
         },
-        title: title || this._data.title,
-      },
-    );
+        title: title || this._data.title
+      }
+    )
   }
 
   /**
    * Moves caret to the end of contentEditable element
    * @param {HTMLElement} element - contentEditable element
    */
-  moveCaretToEnd(element) {
-    const range = document.createRange();
-    const selection = window.getSelection();
+  moveCaretToEnd (element) {
+    const range = document.createRange()
+    const selection = window.getSelection()
 
-    range.selectNodeContents(element);
-    range.collapse(false);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    range.selectNodeContents(element)
+    range.collapse(false)
+    selection.removeAllRanges()
+    selection.addRange(range)
   }
 
   /**
@@ -431,19 +431,19 @@ export default class AttachesTool {
    * @param attributes
    * @return {HTMLElement}
    */
-  make(tagName, classNames = null, attributes = {}) {
-    const el = document.createElement(tagName);
+  make (tagName, classNames = null, attributes = {}) {
+    const el = document.createElement(tagName)
 
     if (Array.isArray(classNames)) {
-      el.classList.add(...classNames);
+      el.classList.add(...classNames)
     } else if (classNames) {
-      el.classList.add(classNames);
+      el.classList.add(classNames)
     }
 
     for (const attrName in attributes) {
-      el[attrName] = attributes[attrName];
+      el[attrName] = attributes[attrName]
     }
 
-    return el;
+    return el
   }
 }

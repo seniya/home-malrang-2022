@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import _ from 'lodash'
 
 import {
   Card,
@@ -13,49 +13,46 @@ import {
   Upload,
   InputNumber,
   message,
-  Skeleton,
-} from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+  Skeleton
+} from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
-import { RootState } from '../../store/configureStore';
-import postModule from '../../store/modules/post';
-import { IPostRequest } from '../../store/modules/post/post.interface';
-import Editor from './components/blogEditor';
-import { CATEGORY_ITEMS, CATEGORY_NAMES } from '../../utils/constant';
+import { RootState } from '../../store/configureStore'
+import postModule from '../../store/modules/post'
+import { IPostRequest } from '../../store/modules/post/post.interface'
+import Editor from './components/blogEditor'
+import { CATEGORY_ITEMS, CATEGORY_NAMES } from '../../utils/constant'
 
-function BlogUpdate() {
-  const { url } = useRouteMatch();
-  const { id } = useParams<{ id: string }>();
+function BlogUpdate () {
+  const { id } = useParams<{ id: string }>()
 
-  const postState = useSelector((store: RootState) => store.post.postReducer);
+  const postState = useSelector((store: RootState) => store.post.postReducer)
   const {
     post,
-    isLoadingReadPost,
     isDoneReadPost,
-    errorReadPost,
     isLoadingUpdatePost,
     isDoneUpdatePost,
-    errorUpdatePost,
-  } = postState;
+    errorUpdatePost
+  } = postState
 
   const reqReadPost = (id: string) => {
-    dispatch(postModule.actions.READ_POST_REQUEST(id));
-  };
+    dispatch(postModule.actions.READ_POST_REQUEST(id))
+  }
 
   useEffect(() => {
-    reqReadPost(id);
+    reqReadPost(id as string)
     return () => {
-      dispatch(postModule.actions.READ_POST_RESET());
-    };
-  }, []);
+      dispatch(postModule.actions.READ_POST_RESET())
+    }
+  }, [])
 
-  const [content, setContent] = useState<any>();
+  const [content, setContent] = useState<any>()
 
   useEffect(() => {
     if (isDoneReadPost) {
-      const parseContent = JSON.parse(post?.content || '');
-      console.log('parseContent : ', parseContent);
-      setContent(parseContent);
+      const parseContent = JSON.parse(post?.content || '')
+      console.log('parseContent : ', parseContent)
+      setContent(parseContent)
 
       if (post?.attachment) {
         const fileTemp = {
@@ -63,45 +60,45 @@ function BlogUpdate() {
           name: post?.attachment.originalname,
           status: 'done',
           url: post?.attachment.download,
-          response: post?.attachment,
-        };
-        updateFileList([fileTemp]);
+          response: post?.attachment
+        }
+        updateFileList([fileTemp])
       }
     }
-  }, [isDoneReadPost]);
+  }, [isDoneReadPost])
 
-  const history = useHistory();
+  const history = useNavigate()
 
   useEffect(() => {
     if (isDoneUpdatePost) {
-      message.success('성공적');
-      history.push(`/blogs/read/${id}`);
+      message.success('성공적')
+      history(`/blogs/read/${id}`)
     }
     if (errorUpdatePost) {
-      message.error(errorUpdatePost);
+      message.error(errorUpdatePost)
     }
     return () => {
-      dispatch(postModule.actions.UPDATE_POST_RESET());
-    };
-  }, [isDoneUpdatePost, errorUpdatePost]);
+      dispatch(postModule.actions.UPDATE_POST_RESET())
+    }
+  }, [isDoneUpdatePost, errorUpdatePost])
 
-  const dispatch = useDispatch();
-  const [editor, setEditor] = useState<any>();
+  const dispatch = useDispatch()
+  const [editor, setEditor] = useState<any>()
 
   const onReadyEditor_ = (editor_: any): void => {
-    console.log('onReadyEditor_ data : ', editor_);
-    setEditor(editor_);
-  };
+    console.log('onReadyEditor_ data : ', editor_)
+    setEditor(editor_)
+  }
 
   useEffect(() => {
     return () => {
-      setEditor(null);
-    };
-  }, []);
+      setEditor(null)
+    }
+  }, [])
 
   const fetchPostData = async (values: any) => {
-    const content = await editor.saver.save();
-    const contentStr = JSON.stringify(content);
+    const content = await editor.saver.save()
+    const contentStr = JSON.stringify(content)
 
     const reqPostData: IPostRequest = {
       id: post?.id,
@@ -111,75 +108,76 @@ function BlogUpdate() {
       subjectTitle: values.subjectTitle || values.title,
       subjectOrder: values.subjectOrder || 1,
       content: contentStr,
-      contentHtml: contentStr,
-    };
+      contentHtml: contentStr
+    }
     if (fileList.length > 0) {
-      reqPostData.attachment = fileList[0].response.data;
+      reqPostData.attachment = fileList[0].response.data
     }
     if (categories.length > 0) {
-      const categories_ = [];
+      const categories_ = []
 
       for (let i = 0; i < categories.length; i++) {
-        const cateName = categories[i];
-        const item = _.find(CATEGORY_ITEMS, { name: cateName });
+        const cateName = categories[i]
+        const item = _.find(CATEGORY_ITEMS, { name: cateName })
         if (item !== undefined) {
-          categories_.push(item);
+          categories_.push(item)
         }
       }
-      reqPostData.categories = categories_;
+      reqPostData.categories = categories_
     } else {
-      reqPostData.categories = [CATEGORY_ITEMS[0]];
+      reqPostData.categories = [CATEGORY_ITEMS[0]]
     }
-    dispatch(postModule.actions.UPDATE_POST_REQUEST(reqPostData));
-  };
+    dispatch(postModule.actions.UPDATE_POST_REQUEST(reqPostData))
+  }
 
   const onFinish = (values: any) => {
-    console.log('onFinish Success:', values);
-    fetchPostData(values);
-  };
+    console.log('onFinish Success:', values)
+    fetchPostData(values)
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-    message.error(errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+    message.error(errorInfo)
+  }
 
-  const [fileList, updateFileList] = useState<any[]>([]);
+  const [fileList, updateFileList] = useState<any[]>([])
 
   const uploadUrl = `${
     process.env.NODE_ENV === 'development'
       ? process.env.REACT_APP_API_URL_DEV
       : process.env.REACT_APP_API_URL_PROD
-  }/attachments/image`;
-  const authorization = 'Bearer ' + localStorage.getItem('MALRANG_TOKEN') || '';
+  }/attachments/image`
+  const authorization = 'Bearer ' + localStorage.getItem('MALRANG_TOKEN') || ''
   const uploadProps = {
     name: 'file',
     action: uploadUrl,
     headers: {
-      authorization: authorization,
+      authorization
     },
     accept: 'image/png, image/jpeg',
     defaultFileList: fileList,
-    onChange(info: any) {
+    onChange (info: any) {
       if (info.file.status !== 'uploading') {
-        updateFileList(info.fileList.filter((file: any) => !!file.status));
+        updateFileList(info.fileList.filter((file: any) => !!file.status))
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+        message.success(`${info.file.name} file uploaded successfully`)
       } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name} file upload failed.`)
       }
-    },
-  };
+    }
+  }
 
-  const [categories, updateCategories] = useState<string[]>([]);
-  const filteredOptions = CATEGORY_NAMES.filter((o) => !categories.includes(o));
+  const [categories, updateCategories] = useState<string[]>([])
+  const filteredOptions = CATEGORY_NAMES.filter((o) => !categories.includes(o))
   const handleChangeSelect = (selectedItems: string[]) => {
-    updateCategories(selectedItems);
-  };
+    updateCategories(selectedItems)
+  }
 
   return (
     <>
-      {isDoneReadPost && content ? (
+      {isDoneReadPost && content
+        ? (
         <Form
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
@@ -191,9 +189,9 @@ function BlogUpdate() {
             title="블로그 수정"
             style={{ width: '100%' }}
             actions={[
-              <Button type="primary" htmlType="submit" loading={isLoadingUpdatePost}>
+              <Button type="primary" htmlType="submit" loading={isLoadingUpdatePost} key="index">
                 Submit
-              </Button>,
+              </Button>
             ]}
           >
             <Form.Item
@@ -263,11 +261,12 @@ function BlogUpdate() {
             </Card>
           </Card>
         </Form>
-      ) : (
+          )
+        : (
         <Skeleton active />
-      )}
+          )}
     </>
-  );
+  )
 }
 
-export default BlogUpdate;
+export default BlogUpdate

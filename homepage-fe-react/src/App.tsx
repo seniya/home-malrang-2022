@@ -1,12 +1,10 @@
-import MainContainer from './pages/_container';
+import MainContainer from './pages/_container'
 
-function App() {
+function App () {
   // console.log('process.env : ', process.env);
   return (
-    <>
-      <MainContainer />
-    </>
-  );
+    <MainContainer />
+  )
 }
 
-export default App;
+export default App

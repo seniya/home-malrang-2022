@@ -1,9 +1,8 @@
-import reducer from './user.reducer';
-import saga from './user.saga';
-import { actions } from './user.reducer';
+import reducer, { actions } from './user.reducer'
+import saga from './user.saga'
 
 export default {
   reducer,
   saga,
-  actions,
-};
+  actions
+}

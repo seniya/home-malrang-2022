@@ -2,7 +2,7 @@
   "eslint.workingDirectories": [
     { "mode": "auto" }
   ],
-   "editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
   "eslint.alwaysShowStatus": true,
@@ -19,6 +19,5 @@
   "debug.console.fontSize": 16,
   "editor.suggestFontSize": 16,
   "markdown.preview.fontSize": 16,
-  "editor.wordWrapColumn": 100,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "editor.wordWrapColumn": 100
 }
