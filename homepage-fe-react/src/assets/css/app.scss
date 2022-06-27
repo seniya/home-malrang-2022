@@ -1,0 +1,43 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+
+.logo {
+  // width: 200px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 0px 16px 0;
+  line-height: 32px;
+  padding-left: 15px;
+  padding-right: 5px;
+  float: right;
+
+  span {
+    color: #fff;
+  }
+
+  .site-layout-sub-header-background-sign-btn {
+    float: right;
+  }
+}
+
+.site-layout {
+  background: #fff;
+}
+
+.site-layout-main-content {
+  border: 1px solid #cccccc;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}
