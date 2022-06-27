@@ -8,6 +8,8 @@ import {
   SettingOutlined,
   LogoutOutlined
 } from '@ant-design/icons'
+
+import { userStore } from '@/store/user.store'
 import Breadcrumbs from './components/breadcrumb'
 
 const Home = lazy(() => import('@/pages/home'))
@@ -21,6 +23,8 @@ const { Header, Content, Footer } = Layout
 const { SubMenu } = Menu
 
 function Container () {
+  const { isDone, isLoading, user, token } = userStore()
+
   // const dispatch = useDispatch()
   // const getUserInfo = () => {
   //   dispatch(userModule.actions.GET_USER_REQUEST())
@@ -63,10 +67,9 @@ function Container () {
         >
           {
             <div className="logo">
-              <span>손님 안녕</span>
-              {/* <span>Hello. </span>
+              {<span>Hello. </span>}
               {<span>{token ? `${user.name} 님` : '손님'}</span>}
-              {token ? renderBtnLogout() : ''} */}
+              {token ? renderBtnLogout() : ''}
             </div>
           }
           <Menu theme="dark" mode="horizontal" selectedKeys={[location.pathname]}>

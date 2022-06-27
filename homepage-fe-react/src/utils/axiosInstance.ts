@@ -31,7 +31,7 @@ export function setInterceptors (instance: AxiosInstance) {
 }
 
 // const apiRootPath = 'http://localhost:3000';
-const apiRootPath = '/api'
+const apiRootPath = 'https://api.malrang.net'
 
 function createInstance () {
   const instance: AxiosInstance = axios.create({

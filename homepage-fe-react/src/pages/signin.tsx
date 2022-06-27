@@ -1,3 +1,4 @@
+import { userStore } from '@/store/user.store'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useEffect } from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
@@ -16,56 +17,40 @@ const tailLayout = {
 
 function SignIn () {
   const history = useNavigate()
-  // const dispatch = useDispatch()
-
-  // const userState = useSelector((store: RootState) => store.user.userReducer)
-  // // const { isLoading, isDone: isSigninDone, error: isSigninError, user, token } = userState;
-  // const { isLoading, token } = userState
-  const isLoading = false
-  const token = ''
-
-  // const fetchSignin = (values: any) => {
-  //   // console.log('fetchSignin signinSlice : ', signinSlice);
-  //   dispatch(
-  //     userModule.actions.SIGN_IN_REQUEST({
-  //       email: values.email,
-  //       password: values.password
-  //     })
-  //   )
-  // }
+  const { isDone, isLoading, user, token, apiSignIn } = userStore()
 
   const onFinish = (values: any) => {
     console.log('onFinish Success:', values)
     // fetchSignin(values)
+    apiSignIn(values)
   }
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
   }
 
-  useEffect(() => {
-    if (token) {
-      history('/')
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if (token) {
+  //     history('/')
+  //   }
+  // }, [token])
 
   // useEffect(() => {
-  //   if (isSigninDone) {
-  //     history.push('/');
+  //   if (isDone) {
+  //     history.push('/')
   //   }
-  // }, [isSigninDone]);
-  // const isLoading = false;
+  // }, [isDone])
+
   return (
     <>
-      {/*
+      {
       <div>
         <p>isLoading: {isLoading ? 'true' : 'false'}</p>
-        <p>isDone: {isSigninDone ? 'true' : 'false'}</p>
-        <p>error: {isSigninError}</p>
+        <p>isDone: {isDone ? 'true' : 'false'}</p>
         <p>name: {user.name}</p>
         <p>token: {token}</p>
       </div>
-      */}
+      }
       <Form
         {...layout}
         name="basic"
