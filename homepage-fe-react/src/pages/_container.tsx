@@ -23,23 +23,24 @@ const { Header, Content, Footer } = Layout
 const { SubMenu } = Menu
 
 function Container () {
-  const { isDone, isLoading, user, token } = userStore()
+  const { isDone, isLoading, user, token, apiGetMe } = userStore()
 
   // const dispatch = useDispatch()
   // const getUserInfo = () => {
   //   dispatch(userModule.actions.GET_USER_REQUEST())
   // }
 
-  // useEffect(() => {
-  //   getUserInfo()
-  // }, [])
+  useEffect(() => {
+    apiGetMe()
+  }, [])
 
   // const userState = useSelector((store: RootState) => store.user.userReducer)
   // const { user, token } = userState
 
   const location = useLocation()
   const onClickBtnSignout = () => {
-    // dispatch(userModule.actions.SIGN_OUT())
+    localStorage.removeItem('MALRANG_TOKEN')
+    window.location.href = '/'
   }
 
   const renderBtnLogout = () => {
@@ -59,68 +60,67 @@ function Container () {
   }
 
   return (
-    <>
-      <Layout className="site-layout">
-        <Header
-          className="site-layout-sub-header-background"
-          style={{ position: 'fixed', zIndex: 999, width: '100%' }}
-        >
-          {
-            <div className="logo">
-              {<span>Hello. </span>}
-              {<span>{token ? `${user.name} 님` : '손님'}</span>}
-              {token ? renderBtnLogout() : ''}
-            </div>
-          }
-          <Menu theme="dark" mode="horizontal" selectedKeys={[location.pathname]}>
-            <Menu.Item key="/" icon={<HomeOutlined style={{ fontSize: '18px' }} />}>
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="/blogs" icon={<CoffeeOutlined style={{ fontSize: '18px' }} />}>
-              <Link to="/blogs">Blog</Link>
-            </Menu.Item>
-            <Menu.Item key="/toys" icon={<CoffeeOutlined style={{ fontSize: '18px' }} />}>
-              <Link to="/toys">Toys</Link>
-            </Menu.Item>
-            <Menu.Item key="/about" icon={<BulbOutlined style={{ fontSize: '18px' }} />}>
-              <Link to="/about">About</Link>
-            </Menu.Item>
-            <SubMenu
-              key="admin"
-              icon={<SettingOutlined style={{ fontSize: '18px' }} />}
-              title="Admin"
-            >
-              <Menu.Item key="/sign-in">
-                <Link to="/sign-in">sign-in</Link>
-              </Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Header>
-        <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-          <Breadcrumbs />
-          <div
-            className="site-layout-main-content site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            {/* <div>메인 컨테이너</div> */}
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/blogs" element={<Blog />} />
-                <Route path="/toys" element={<Toys />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/sign-in" element={<SignIn />} />
-              </Routes>
-            </Suspense>
+    <Layout className="site-layout">
+      <Header
+        className="site-layout-sub-header-background"
+        style={{ position: 'fixed', zIndex: 999, width: '100%' }}
+      >
+        {isDone
+          ? <div className="logo">
+            {<span>Hello. </span>}
+            {<span>{token ? `${user.name} 님` : '손님'}</span>}
+            {token ? renderBtnLogout() : ''}
           </div>
-        </Content>
-        <Footer className="site-layout" style={{ textAlign: 'center' }}>
-          Made By Malrang
-        </Footer>
-      </Layout>
-      ,
-    </>
+          : <span></span>
+        }
+        <Menu theme="dark" mode="horizontal" selectedKeys={[location.pathname]}>
+          <Menu.Item key="/" icon={<HomeOutlined style={{ fontSize: '18px' }} />}>
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item key="/blogs" icon={<CoffeeOutlined style={{ fontSize: '18px' }} />}>
+            <Link to="/blogs">Blog</Link>
+          </Menu.Item>
+          <Menu.Item key="/toys" icon={<CoffeeOutlined style={{ fontSize: '18px' }} />}>
+            <Link to="/toys">Toys</Link>
+          </Menu.Item>
+          <Menu.Item key="/about" icon={<BulbOutlined style={{ fontSize: '18px' }} />}>
+            <Link to="/about">About</Link>
+          </Menu.Item>
+          <SubMenu
+            key="admin"
+            icon={<SettingOutlined style={{ fontSize: '18px' }} />}
+            title="Admin"
+          >
+            <Menu.Item key="/sign-in">
+              <Link to="/sign-in">sign-in</Link>
+            </Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Header>
+      <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+        <Breadcrumbs />
+        <div
+          className="site-layout-main-content site-layout-background"
+          style={{ padding: 24, minHeight: 360 }}
+        >
+          {/* <div>메인 컨테이너</div> */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/blogs/*" element={<Blog />} />
+              <Route path="/toys" element={<Toys />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/sign-in" element={<SignIn />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </Content>
+      <Footer className="site-layout" style={{ textAlign: 'center' }}>
+        Made By Malrang
+      </Footer>
+    </Layout>
+
   )
 }
 

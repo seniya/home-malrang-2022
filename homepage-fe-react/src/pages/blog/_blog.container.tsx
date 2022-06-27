@@ -13,10 +13,10 @@ function Blog () {
       {BlogPageHeader()}
       <div>
         <Routes>
-          <Route path="/blogs" element={<BlogList />} />
-          <Route path="/blogs/create" element={<BlogCreate />} />
-          <Route path="/blogs/update/:id" element={<BlogUpdate />} />
-          <Route path="/blogs/read/:id" element={<BlogRead />} />
+          <Route path="/" element={<BlogList />} />
+          <Route path="create" element={<BlogCreate />} />
+          <Route path="update/:id" element={<BlogUpdate />} />
+          <Route path="read/:id" element={<BlogRead />} />
         </Routes>
       </div>
     </>

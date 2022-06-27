@@ -3,7 +3,6 @@ import axios, { AxiosInstance } from 'axios'
 export function setInterceptors (instance: AxiosInstance) {
   instance.interceptors.request.use(
     function (config) {
-      // axios.defaults.headers.common.Authorization = localStorage.getItem('token')
       if (config.headers) {
         config.headers.Authorization = 'Bearer ' + localStorage.getItem('MALRANG_TOKEN') || ''
       }
@@ -18,7 +17,6 @@ export function setInterceptors (instance: AxiosInstance) {
     function (response) {
       console.log(`${response.config.url}`, response)
       if (response.data?.data?.token) {
-        // console.log('response.data?.data?.token : ');
         localStorage.setItem('MALRANG_TOKEN', response.data?.data?.token)
       }
       return response
@@ -30,7 +28,6 @@ export function setInterceptors (instance: AxiosInstance) {
   return instance
 }
 
-// const apiRootPath = 'http://localhost:3000';
 const apiRootPath = 'https://api.malrang.net'
 
 function createInstance () {

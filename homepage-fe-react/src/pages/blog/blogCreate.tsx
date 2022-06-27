@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { Card, Form, Input, Button, Collapse, Select, Upload, InputNumber, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
+import BlogEditor from '@/pages/blog/components/blogEditor'
+
 // import { useDispatch, useSelector } from 'react-redux'
 // import { RootState } from '../../store/configureStore'
 // import postModule from '../../store/modules/post'
@@ -122,6 +124,7 @@ function BlogCreate () {
 
   return (
     <>
+      blog create
       <Form
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
@@ -188,6 +191,7 @@ function BlogCreate () {
           </Collapse>
           ,
           <Card title="본문 (Content)" style={{ width: '100%' }}>
+            <BlogEditor />
             {/* <Editor onReadyEditor={onReadyEditor_} /> */}
           </Card>
         </Card>

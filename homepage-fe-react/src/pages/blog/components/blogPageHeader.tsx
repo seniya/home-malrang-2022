@@ -8,10 +8,13 @@ import { Link, useNavigate } from 'react-router-dom'
 // import postModule from '../../../store/modules/post'
 
 function BlogPageHeader () {
+  // const pathname = '/blogs'
   // const { location } = useReactRouter<any>()
   // console.log({ history, location, match });
   const { pathname } = location
-  // console.log('pathname : ', pathname);
+
+  // const pathname = '/blogs'
+  console.log('pathname : ', pathname)
   // console.log('pathname.indexOf /blogs/read : ', pathname.indexOf('/blogs/read'));
 
   // const renderPageHeader = () => {

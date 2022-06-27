@@ -1,16 +1,17 @@
 import create from 'zustand'
 import { mountStoreDevtool } from 'simple-zustand-devtools'
 import { AxiosResponse } from 'axios'
-import { IUser, IUserRequest, IUserResponse } from './interface/user.interface'
+import { IUser, IUserRequest, IUserResponse, IUserState } from '@/store/interface/user.interface'
 import { axiosInstance } from '@/utils/axiosInstance'
 
-interface userStoreIF {
-  isLoading: boolean
-  isDone: boolean
-  error: string
-  token: string | null
-  user: IUser
+interface userStoreIF extends IUserState {
+  // isLoading: boolean
+  // isDone: boolean
+  // error: string
+  // token: string | null
+  // user: IUser
   apiSignIn: (payload: IUserRequest) => void
+  apiGetMe: () => void
 }
 
 const userInit: IUser = {
@@ -46,12 +47,41 @@ export const userStore = create<userStoreIF>((set, get) => ({
         token: response.data.data.token,
         user: response.data.data.user
       }))
-      console.log('response : ', response.data.data.user)
+      console.log('response : ', response.data)
     } catch (error: any) {
       set(state => ({
+        ...state,
         error: error.message,
         isLoading: false,
         isDone: false
+      }))
+    }
+  },
+  apiGetMe: async () => {
+    set(state => ({
+      ...state,
+      isLoading: true,
+      isDone: false
+    }))
+    try {
+      const response: AxiosResponse<IUserResponse> = await axiosInstance({
+        method: 'GET',
+        url: '/api/authentication/get-me'
+      })
+      set(state => ({
+        ...state,
+        isLoading: false,
+        isDone: true,
+        token: response.data.data.token,
+        user: response.data.data.user
+      }))
+      console.log('response : ', response.data)
+    } catch (error: any) {
+      set(state => ({
+        ...state,
+        error: error.message,
+        isLoading: false,
+        isDone: true
       }))
     }
   }
