@@ -1,5 +1,5 @@
 {
-  "name": "www.malrang.net",
+  "name": "malrang.net",
   "private": false,
   "description": "Malrng Blog",
   "version": "3.0.0",
@@ -54,12 +54,5 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zoomkoding/zoomkoding-gatsby-blog"
-  },
-  "bugs": {
-    "url": "https://github.com/zoomkoding/zoomkoding-gatsby-blog/issues"
   }
 }
