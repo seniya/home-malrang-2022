@@ -73,8 +73,7 @@ module.exports = {
       // ========================================================
       {
         title: 'Simple-Finder with electron',
-        description:
-          'This application is a basic function of file finder.',
+        description: 'This application is a basic function of file finder.',
         techStack: ['electron', 'vue'],
         thumbnailUrl: 'finder_sample-pic-01.png',
         links: {

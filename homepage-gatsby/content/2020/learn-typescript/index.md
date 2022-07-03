@@ -3,7 +3,7 @@ emoji: 🧢
 title: TypeScript. - 01.시작하기
 subtitle: typescript 시작하기
 date: '2020-06-09 00:00:00'
-author: 줌코딩
+author: malrang
 tags: TypeScript
 categories: 블로그
 comments: true
@@ -118,7 +118,6 @@ console1 :>>  true boolean
 - 변환된 `파일이름.js` 를 이용하여 프로그램 작성을 계속 진행합니다.
 
 * 선언한된 데이터를 다른 타입으로 사용하려고 하면 컴파일 과정에서 에러가 발생하고 js 파일이 생성되지 않습니다.
-
 
 ```toc
 

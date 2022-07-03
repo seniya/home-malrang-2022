@@ -1,9 +1,11 @@
 ﻿---
-layout: post
-title: 33-js-concepts. - 03.값 타입(Value Type)과 참조 타입(Refecrence Type)
+emoji: 🧢
+title: (33 js concepts) 03.값 타입(Value Type)과 참조 타입(Refecrence Type)
 subtitle: 03. Pass by Value vs Pass by Reference
-tags: [33-js-concepts]
-image: /img/posts/2019-02-21-모든 자바스크립트 개발자가 알아야 하는 33가지 개념.jpg
+date: '2020-02-16 00:00:00'
+author: malrang
+tags: 33-js-concepts
+categories: 블로그
 comments: true
 ---
 
@@ -13,16 +15,16 @@ comments: true
 
 ```javascript
 let a = 10;
-let b = a;  // 10이라는 숫자값이 변수 b의 값으로 복사 되어 들어갔다.
-console.log(a, b);  
+let b = a; // 10이라는 숫자값이 변수 b의 값으로 복사 되어 들어갔다.
+console.log(a, b);
 // > 10, 10
-console.log(a === b); 
+console.log(a === b);
 // > true
 
-b = 5;  // 변수 b의 값은 값 자체를 지칭하므로 변수 a의 영향을 미치지 않는다.
-console.log(a, b);  
+b = 5; // 변수 b의 값은 값 자체를 지칭하므로 변수 a의 영향을 미치지 않는다.
+console.log(a, b);
 // > 10, 5
-console.log(a === b); 
+console.log(a === b);
 // > false
 ```
 
@@ -35,28 +37,28 @@ console.log(a === b);
 
 ```javascript
 let a = { val: 10 };
-let b = a;  // 변수 a의 참조값(주소)가 복사되어 들어간다.
-console.log(a, b);  
+let b = a; // 변수 a의 참조값(주소)가 복사되어 들어간다.
+console.log(a, b);
 // > Object {val: 10}
 // > Object {val: 10}
 console.log(a === b); // 같은 참조값(주소)를 바라보고 있으므로 결과는 참.
 // > true
 
-b.val = 5;  
+b.val = 5;
 // 변수 b의 값은 값 변수 a의 참조값을 가르키고 있다. 그러므로 해당 명령은 참조값의 val 프로퍼티를 변경하는 것이고 따라서 해당 명령이 수행되고 난 후에는 같은 곳을 바라보았던 변수 b의 결과도 달라지게 된다.
-console.log(a, b);  
+console.log(a, b);
 // > Object {val: 5}
 // > Object {val: 5}
-console.log(a === b); 
+console.log(a === b);
 // > true
 ```
 
-<br />  
+<br />
 
 ```javascript
 let a = { val: 10 };
-let b = { val: 10 };  
-console.log(a, b);  
+let b = { val: 10 };
+console.log(a, b);
 // > Object {val: 10}
 // > Object {val: 10}
 console.log(a === b); // 같은 다른 참조값(주소)를 바라보고 있으므로 결과는 거짓.
@@ -64,4 +66,8 @@ console.log(a === b); // 같은 다른 참조값(주소)를 바라보고 있으�
 ```
 
 <br />  
-<br />  
+<br />
+
+```toc
+
+```

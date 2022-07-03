@@ -1,9 +1,11 @@
 ﻿---
-layout: post
-title: 33-js-concepts. - 02.원시 자료형(Primitive Data type)
+emoji: 🧢
+title: (33 js concepts) 02.원시 자료형(Primitive Data type)
 subtitle: 02. 원시 자료형(Primitive Data type)
-tags: [33-js-concepts]
-image: /img/posts/2019-02-21-모든 자바스크립트 개발자가 알아야 하는 33가지 개념.jpg
+date: '2019-02-26 00:00:00'
+author: malrang
+tags: 33-js-concepts
+categories: 블로그
 comments: true
 ---
 
@@ -123,3 +125,7 @@ foo; // undefined
 
 - Host Object(사용자 정의 객체)  
   : 사용자가 정의하여 사용
+
+```toc
+
+```
