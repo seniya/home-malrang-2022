@@ -5,6 +5,7 @@
   "version": "3.0.0",
   "author": "malrang <seniya2@gmail.com>",
   "dependencies": {
+    "@malrang-toy/wise-cat-saying": "^1.0.3",
     "@mui/icons-material": "^5.1.0",
     "@mui/material": "^5.1.0",
     "gatsby": "^4.9.3",

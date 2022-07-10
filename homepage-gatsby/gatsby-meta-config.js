@@ -72,6 +72,17 @@ module.exports = {
       // ========================================================
       // ========================================================
       {
+        title: 'Wise-Cat-Saying',
+        description: '@malrang-toy/wise-cat-saying is toy project for npm module test',
+        techStack: ['npm', 'rollup', 'umd', 'esm'],
+        thumbnailUrl: 'wise-cat-saying-01.png',
+        links: {
+          post: '/gatsby-starter-zoomkoding-introduction',
+          github: 'https://github.com/seniya/malrang-toy-wise-cat-saying',
+          demo: 'http://localhost:8000/demo',
+        },
+      },
+      {
         title: 'Simple-Finder with electron',
         description: 'This application is a basic function of file finder.',
         techStack: ['electron', 'vue'],
