@@ -9,6 +9,20 @@ categories: 블로그
 comments: true
 ---
 
+## 연관 게시글
+
+| 단계 | 제목 | 비고 |
+|---|:---|---|
+| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) <- 지금 문서 | `old school 버전` |
+| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) | `old school 버전`  |
+| `03.배포하기(모듈)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) | `번들러 이용` |
+
+<br />
+
+---
+
+<br />
+
 ## 시작 전 준비물
 
 - node 환경 및 인터넷 환경
@@ -48,7 +62,7 @@ comments: true
 
 ### 2.1 프로젝트 생성
 
-```sh
+```bash
 # [shell]
 
 mkdir myJavascriptLib  # 사용하고자 하는 디렉토리
@@ -236,18 +250,18 @@ export const wiseword = [
   <script type="module" src="index.js"></script>
   ...
 ```
-- 완전히 예전 방식의 프로그램은 아닙니다. `type="module"` 을 이용하여 ES2015(ES6) 지원 형식인 javascript import/export 기능을 사용합니다.
+- 완전히 예전 방식의 프로그램은 아닙니다. `type="module"` 을 이용하여 ES2015(ES6) 지원 형식인 **javascript import/export** 기능을 사용합니다.
 - css는 설명을 생략합니다.
 
   > 참고 링크  
-    [MDN - javascript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)  
-    [MDN - javascript import](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)  
-    [MDN - javascript export](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/export)
+  >  [MDN - javascript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)  
+  >  [MDN - javascript import](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)  
+  >  [MDN - javascript export](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/export)
 
 
 ### 3.2 javascript 코드
 
-- 먼저 구글링을 통해 찾은 명언을 적당한 구조체 형식으로 명언사전(wiseword.js)을 만들고 import 합니다.
+- 먼저 구글링을 통해 찾은 명언을 적당한 구조체 형식으로 **명언사전(wiseword.js)** 을 만들고 import 합니다.
 
 ```js
 // [source] index.js
@@ -285,12 +299,19 @@ document.getElementById('wise_contents').textContent = randomWord.contents
 
 <img src="./img/live-server.png">
 
-<br /><br />
+<br />
 
-- 다음과 같이 실행됩니다.
+---
 
 <img src="./img/my-app-image2.png">
 
+- 다음과 같이 실행됩니다.
+
+<br />
+
+## 4. 다음단계로
+
+- 이제 내가 만든 이 간단한 프로그램을 다른사람들도 사용하도록 하려면 어떻게 해야 할지 고민해 봅시다
 
 
 ```toc
