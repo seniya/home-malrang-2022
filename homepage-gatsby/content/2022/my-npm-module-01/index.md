@@ -11,11 +11,11 @@ comments: true
 
 ## 연관 게시글
 
-| 단계 | 제목 | 비고 |
-|---|:---|---|
-| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) <- 지금 문서 | `old school 버전` |
-| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) | `old school 버전`  |
-| `03.배포하기(모듈)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) | `번들러 이용` |
+| 단계 | 제목 |
+|---|:---|
+| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) `*` |
+| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) |
+| `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) |
 
 <br />
 
@@ -293,7 +293,7 @@ document.getElementById('wise_contents').textContent = randomWord.contents
 ```
 
 
-## 3. app 실행
+## 4. app 실행
 
 - vscode 의 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 를 이용하여 확인해 볼수 있습니다.
 
@@ -309,7 +309,7 @@ document.getElementById('wise_contents').textContent = randomWord.contents
 
 <br />
 
-## 4. 다음단계로
+## 5. 다음단계로
 
 - 이제 내가 만든 이 간단한 프로그램을 다른사람들도 사용하도록 하려면 어떻게 해야 할지 고민해 봅시다
 

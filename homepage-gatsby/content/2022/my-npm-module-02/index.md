@@ -1,7 +1,7 @@
 ---
 emoji: 🧢
 title: 나만의 자바스크립트 라이브러리 만들기 - 02.배포하기(기본) 
-subtitle: 먼저 아무거나 만들기
+subtitle: 배포판으로 만들기
 date: '2020-07-16 00:00:00'
 author: malrang
 tags: javascript
@@ -9,13 +9,13 @@ categories: 블로그
 comments: true
 ---
 
-## 연관 게시글
+## 연관 게시글  
 
-| 단계 | 제목 | 비고 |
-|---|:---|---|
-| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) | `old school 버전` |
-| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) <- 지금 문서 | `old school 버전`  |
-| `03.배포하기(모듈)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) | `번들러 이용` |
+| 단계 | 제목 |
+|---|:---|
+| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) |
+| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) `*` |
+| `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) |
 
 <br />
 
@@ -36,7 +36,7 @@ comments: true
 
 이전에 만들어 본 **고양이-명언-라이브러리**( [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) ) 를 다른 친구들이 이용하게 하려면 어떻게 해야 할까요
 
-### 1.1 간단한 방법 **
+### 1.1 간단한 방법 `**`
 
 작성한 코드덩어리를 `zip` 파일로 압축하고 친구들에게   
 
@@ -51,8 +51,6 @@ comments: true
 
 `node_module` 폴더 안에 라이브러리 형태로 들어갈 수 있도록 만들어서 조금 더 편리하게 사용하도록 안내합니다.  
 다음 문서에서 진행해 보도록 하겠습니다.
-
-
 
 <br />
 
@@ -249,9 +247,9 @@ document.querySelector('#wcs-container').insertAdjacentHTML(
   ...
 ```
 - 상대방에게 **고양이-명언-라이브러리** 를 사용하려면 전달된 파일과 함께 위에 코드 세줄을 추가하라고 이야기 합니다. 
-  1. css를 불러들이고, 
-  2. js파일을 불러들이고, 
-  3. 표시하고자 하는 마크업 어디엔가 `<div class="wcs-container" id="wcs-container"></div>` 코드를 추가하라고 이야기 합니다.
+1. css를 불러들이고, 
+2. js파일을 불러들이고, 
+3. 표시하고자 하는 마크업 어디엔가 `<div class="wcs-container" id="wcs-container"></div>` 코드를 추가하라고 이야기 합니다.
 
 
 ### 3.2 javascript 코드
@@ -295,7 +293,7 @@ document.querySelector('#wcs-container').insertAdjacentHTML(
 - randomWord 관련 내용은 설명 생략합니다.
 
 
-## 3. app 실행
+## 4. app 실행
 
 - vscode 의 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 를 이용하여 확인해 볼수 있습니다. <- 상대방의 입장입니다.
 
@@ -309,14 +307,15 @@ document.querySelector('#wcs-container').insertAdjacentHTML(
 
 <br />
 
-## 4. 다음단계로
+## 5. 다음단계로
 
 - 멋지게 나오면 성공입니다.  
-  1. 이제 `src` 폴더를 압축해서 친구들에게 전달하고 사용법을 설명해주면 됩니다.
-  2. **module** 방식을 이용하기 때문에 상대방이 작성한 코드와 우리가 만들어 놓은 `wiseword`, `randomWord` 오브젝트의 **scope**가 서로 오염되지 않습니다.
-  3. 하지만 전달이 번거롭고 설명 역시 복잡합니다.  
-    3.1 css 파일을 js 코드 안으로 넣어서 파일의 갯수를 줄일수도 있습니다.
-  4. 조금 더 나은 방법은 어떻게 할까요
+
+1. 이제 `src` 폴더를 압축해서 친구들에게 전달하고 사용법을 설명해주면 됩니다.  
+2. **module** 방식을 이용하기 때문에 상대방이 작성한 코드와 우리가 만들어 놓은 `wiseword`, `randomWord` 오브젝트의 **scope**가 서로 오염되지 않습니다.  
+3. 하지만 전달이 번거롭고 설명 역시 복잡합니다.  
+  3.1 css 파일을 js 코드 안으로 넣어서 파일의 갯수를 줄일수도 있습니다.  
+4. 조금 더 나은 방법은 어떻게 할까요
 
 ```toc
 
