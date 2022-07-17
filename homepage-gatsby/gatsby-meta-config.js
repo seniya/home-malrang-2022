@@ -3,7 +3,7 @@ module.exports = {
   description: `Malrang Blog`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://www.malrang.com`,
-  ogImage: `/og-image.png`, // Path to your in the 'static' folder
+  ogImage: `/og-image2.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
       repo: `seniya/blog-comment`, // `zoomkoding/zoomkoding-gatsby-blog`,
