@@ -9,7 +9,7 @@ module.exports = {
       repo: `seniya/blog-comment`, // `zoomkoding/zoomkoding-gatsby-blog`,
     },
   },
-  ga: '0', // Google Analytics Tracking ID
+  ga: '0G-08ZXY7ZPJB', // Google Analytics Tracking ID
   author: {
     name: `김우람`,
     bio: {
