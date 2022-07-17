@@ -1,5 +1,5 @@
 ---
-emoji: 🧢
+emoji: 💼
 title: 나만의 자바스크립트 라이브러리 만들기 - 03.배포하기(번들러) 
 subtitle: 번들러를 이용하여 배포판으로 만들기
 date: '2020-07-16 00:00:00'
@@ -14,8 +14,8 @@ comments: true
 | 단계 | 제목 |
 |---|:---|
 | `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) |
-| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) |
-| `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) `*` |
+| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/)  |
+| `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) `<- 현재글` |
 
 <br />
 
@@ -311,11 +311,6 @@ export default class WiseCatSaying {
 ```js
 // [config] rollup.config.js
 ...
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import { terser } from 'rollup-plugin-terser'
-import commonjs from '@rollup/plugin-commonjs'
-import css from "rollup-plugin-import-css";
-
 export default {
   input: 'src/index.js',
   output: [
@@ -328,16 +323,243 @@ export default {
     file: 'dist/main.esm.js',
     format: 'esm',    
   }
-  ],
+  ]
+  ...
+} 
+```
+
+1. 번들링 옵션을 정의합니다.
+2. input과 output이 정의 되어 있습니다.
+3. input은 번들링을 할 대상 파일
+4. output은 번들링의 결과 파일 (두가지 버전으로 번들링됩니다.)
+5. UMD (Universal Module Definition) -> old school 버전에서 사용가능()
+    > 정확히는 AMD와 CommonJS, window에 추가하는 방식까지 모두 가능한 모듈을 작성하는 방식입니다.
+6. ESM (ECMAScript Module) -> 자바스크립트 자체 모듈 시스템(모던 스타일)에서 사용가능
+
+### 3.3 rollup.config.js 설명
+```js
+// [config] rollup.config.js
+...
+export default {
+  ...
   plugins: [
-    css(), 
-    nodeResolve(), 
-    commonjs(), 
-    terser()
+    css(), // support for css import
+    nodeResolve(), // Locate and bundle third-party dependencies in node_modules
+    commonjs(), // A Rollup plugin to convert CommonJS modules to ES6
+    terser() // Rollup plugin to minify generated es bundle
   ]
 } 
 ...
 ```
+
+-  번들링 작업시 사용되는 플러그인들을 정의합니다.
+
+
+## 4. rollup Bundling
+
+### 4.1 script 등록하기
+```js
+// [package] package.json
+...
+  "scripts": {
+    ...
+    "build": "rollup -c",
+    ...
+  },
+...
+```
+
+-  package.json 에 rollup 관련 스크립트를 추가합니다.
+
+
+### 4.2 script 실행
+```bash
+# 스크립트 실행
+npm run build
+
+# 이하 로그
+> app-step3@1.0.0 build
+> rollup -c
+
+src/index.js → dist/main.umd.js, dist/main.esm.js...
+created dist/main.umd.js, dist/main.esm.js in 195ms
+```
+
+1. 새로 등록한 `build` 스크립트를 실행합니다.
+2. dist 폴더가 만들어지고 `main.umd.js`, `main.esm.js` 파일이 생성됨을 확인합니다.
+3. 성공입니다.
+
+
+## 5. Bundling module 사용하기
+
+### 5.1 `main.umd.js` 버전 사용하기 (`old-school` 버전)
+```html
+<!-- 
+  [html] public/index-oldschool.html
+--> 
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>People homepage</title>
+  <script src="../dist/main.umd.js"></script>
+
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(to bottom, rgb(140, 122, 122) 0%, rgb(175, 135, 124) 65%, rgb(175, 135, 124) 100%) fixed;
+      background-size: cover;
+      font: 14px/20px "Lato", Arial, sans-serif;
+      color: #9E9E9E;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="my-cat-card"></div> 
+
+  <script>
+    window.onload = function(){
+      console.log('window.onload')      
+      const theCat = new WiseCatSaying('my-cat-card')
+      const theWord = theCat.actionSay()
+      console.log('theWord : ', theWord)      
+      theCat.render()
+    }
+  </script>
+</body>
+</html>
+```
+
+1. SPA, react, vue ... 와 같이 모던 자바스크립트를 이용하지 않는 사용자를 위한 방법입니다.(old-school)
+2. html 에서 `<script src="../dist/main.umd.js"></script>` 사용하여 모듈을 불러오고
+3. html 에서 적당한 위치에 `<div id="my-cat-card"></div>` 구문을 추가합니다.
+3. `<script> ... </script>` 내에서 아래의 구문을 추가하여 사용합니다.
+  ```js  
+  const theCat = new WiseCatSaying('my-cat-card')  // 모듈 오브젝트 생성
+  const theWord = theCat.actionSay()  // 추가 메소드
+  theCat.render() // 렌더링
+  ```  
+
+ [위키백과](https://ko.wikipedia.org/wiki/%EC%98%AC%EB%93%9C_%EC%8A%A4%EC%BF%A8) 발췌
+>  `올드 스쿨(old school)`은 이전 시대의 전통적인 형식을 의미하는 영어 단어이다. 올드 스쿨 힙합(Old skool hip hop)은 초기 힙합 음악을 가리키는 장르명이다.
+
+
+
+### 5.2 `main.esm.js` 버전 사용하기 (`modern` 버전)
+
+#### 5.2.1 markup 사용 예시
+```html
+<!-- 
+  [html] public/index-esm.html
+--> 
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Wise Cat Saying</title>
+  <script type="module" src="index-esm.js"></script>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(to bottom, rgb(140, 122, 122) 0%, rgb(175, 135, 124) 65%, rgb(175, 135, 124) 100%) fixed;
+      background-size: cover;
+      font: 14px/20px "Lato", Arial, sans-serif;
+      color: #9E9E9E;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="my-cat-card"></div>
+</body>
+</html>
+```
+
+1. html 에서 적당한 위치에 `<div id="my-cat-card"></div>` 구문을 추가합니다.
+2. `index-esm.js` 는 상대방이 만들었다고 가정합니다.
+
+#### 5.2.2 script 사용 예시
+```js
+// [js] public/index-esm.html
+import WiseCatSaying from "../dist/main.esm.js";
+
+window.onload = function(){
+  console.log('window.onload')
+  const theCat = new WiseCatSaying('my-cat-card')
+  const theWord = theCat.actionSay()
+  console.log('theWord : ', theWord)
+  theCat.render()
+}
+```
+
+1. `main.esm.js` 모듈을 **import** 방식으로 불러옵니다.
+3. 스크립트 내에서 아래의 구문을 추가하여 사용합니다.  
+
+```js  
+  const theCat = new WiseCatSaying('my-cat-card')  // 모듈 오브젝트 생성
+  const theWord = theCat.actionSay()  // 추가 메소드
+  theCat.render() // 렌더링
+```  
+
+
+## 6. NPM module 등록(배포)
+
+### 6.1 들어가기
+1. 지금까지 진행한 rollup 번들링 결과물(`main.umd.js`, `main.esm.js`) 파일을 친구에게 건내고 사용법을 안내해 주면 만들어 놓은 나만의 라이브러리를 배포할수 있습니다.
+2. 다만 여전히 직접 파일을 전달해 주어야 하는 불편함이 있습니다.
+3. [npmjs](https://www.npmjs.com/) 사이트에 내가 만든 모듈을 등록하고 주소만 알려주면 사용할수 있도록 해보겠습니다.
+4. 간단히 설명해 보겠습니다.
+
+### 6.2 준비하기 - 프로젝트
+1. github 에서 '고양이 명언 라이브러'를 위한 Repository 를 생성합니다.
+2. 지금까지 진행한 프로젝트의 내용을 잘 정리하여 커밋합니다.
+3. `readme.md` 파일을 멋지게 작성합니다.
+4. `LICENSE` 는 MIT <- 고양이 그림과, 명언은 외부로부터 가져온 것입니다.
+5. `package.json` 파일을 `npmjs` 에 배포될 형식에 맞추어 작성합니다.
+    > [내 NPM 패키지(모듈) 배포하기](https://heropy.blog/2019/01/31/node-js-npm-module-publish/) 등의 사이트를 참고 합니다.
+
+- **github 의 Repository 등록은 생략할 수 있으나 진행하는 것을 권장합니다.**
+
+### 6.3 모듈 등록 진행하기 - npmjs
+1. [npmjs](https://www.npmjs.com/) 가입
+2. [npmjs](https://www.npmjs.com/) 로그인 후 개인/회사 정보 기입
+3. 콘손에서 npmjs login
+```bash
+npm login
+```
+4. 모듈 등록 (시간이 소요됨)
+```bash
+npm publish
+```
+5. 모듈 등록 확인
+ - https://www.npmjs.com/package/myModuleName 
+6. 나의 모듈 사용하기
+```bash
+npm install myModuleName 
+```
+
+## 7. 마치며
+- 긴글 읽어 주셔서 감사합니다.
+- 내가 만든 모듈이 자바스크립트 생태계에 스며들어 다른이들도 같이 사용할수 있게 되어 기쁩니다. ^^
+- 이글에서 부족했던 설명 부분은 다른 글들도 함께 찾아보고 진행하여 성공하시길 바랍니다.
+- 이글은 2022-07-17 에 작성되었습니다. 시간이 흐르면 정보가 변경될 수 있습니다.
+
+***
+
+## 8. 결과물
+
+### 8.1 GITHUB
+- https://github.com/seniya/malrang-toy-wise-cat-saying
+<img src="./img/github-image.png">
+
+### 8.1 NPMJS
+- https://www.npmjs.com/package/@malrang-toy/wise-cat-saying
+<img src="./img/npmjs-image.png">
 
 
 ```toc

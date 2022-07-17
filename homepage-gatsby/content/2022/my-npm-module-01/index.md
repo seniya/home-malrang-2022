@@ -1,5 +1,5 @@
 ---
-emoji: 🧢
+emoji: 💼
 title: 나만의 자바스크립트 라이브러리 만들기 - 01.시작하기
 subtitle: 먼저 아무거나 만들기
 date: '2020-07-16 00:00:00'
@@ -13,7 +13,7 @@ comments: true
 
 | 단계 | 제목 |
 |---|:---|
-| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) `*` |
+| `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) `<- 현재글` |
 | `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) |
 | `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) |
 
@@ -53,13 +53,7 @@ comments: true
 
 ## 2. 일단 만들어 보기
 
-- old school 버전으로 만들어 보겠습니다.
-- 브라우저에서 바로 실행되는 이전 스타일 HTML, CSS, JAVASCRIPT 를 뜻합니다.
-
- [위키백과](https://ko.wikipedia.org/wiki/%EC%98%AC%EB%93%9C_%EC%8A%A4%EC%BF%A8) 발췌
->  올드 스쿨(old school)은 이전 시대의 전통적인 형식을 의미하는 영어 단어이다. 올드 스쿨 힙합(Old skool hip hop)은 초기 힙합 음악을 가리키는 장르명이다.
-
-
+- 브라우저에서 바로 실행되는 HTML, CSS, JAVASCRIPT 방식으로 만들어 보겠습니다.
 ### 2.1 프로젝트 생성
 
 ```bash
@@ -92,7 +86,7 @@ cd src
 
 ```html
 <!--
-  [source] index.html
+  [html] index.html
 --> 
 
 <html lang="ko">
@@ -125,7 +119,7 @@ cd src
 
 ``` css
 /*
- [source] style.css
+ [css] style.css
 */
 *, *:before, *:after {
   box-sizing: border-box;
@@ -184,7 +178,7 @@ body {
 ### 2.5 파일 작성 - index.js
 
 ```js
-// [source] index.js
+// [js] index.js
 import { wiseword } from './wiseword.js'
 
 console.log('wiseword : ', wiseword);
@@ -204,7 +198,7 @@ document.getElementById('wise_contents').textContent = randomWord.contents
 ### 2.6 파일 작성 - wiseword.js
 
 ```js
-// [source] wiseword.js
+// [js] wiseword.js
 
 export const wiseword = [
   {
@@ -286,7 +280,7 @@ const randomWord = wiseword[getRandomInt(0,24)]
 - 선택된 명언 오브젝트의 이름과 내용이 마크업에 표시되도록 합니다.
 
 ```js
-// [source] index.js
+// [js] index.js
 ...
 document.getElementById('wise_name').textContent = randomWord.name
 document.getElementById('wise_contents').textContent = randomWord.contents

@@ -1,5 +1,5 @@
 ---
-emoji: 🧢
+emoji: 💼
 title: 나만의 자바스크립트 라이브러리 만들기 - 02.배포하기(기본) 
 subtitle: 배포판으로 만들기
 date: '2020-07-16 00:00:00'
@@ -14,7 +14,7 @@ comments: true
 | 단계 | 제목 |
 |---|:---|
 | `01.시작하기` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-01/) |
-| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) `*` |
+| `02.배포하기(기본)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-02/) `<- 현재글` |
 | `03.배포하기(번들러)` | [나만의 자바스크립트 라이브러리 만들기](/2022/my-npm-module-03/) |
 
 <br />
@@ -96,7 +96,7 @@ mkdir src
 
 ```html
 <!--
-  [source] public/index.html
+  [html] public/index.html
 --> 
 
 <html lang="ko">
@@ -129,7 +129,7 @@ mkdir src
 
 ``` css
 /*
- [source] src/style.css
+ [css] src/style.css
 */
 .wcs-container {
   margin: auto;
@@ -176,7 +176,7 @@ mkdir src
 ### 2.5 파일 작성 - wiseCatSaying.js
 
 ```js
-// [source] src/wiseCatSaying.js
+// [js] src/wiseCatSaying.js
 const wiseword = [
   {
     key: 1,
@@ -236,7 +236,7 @@ document.querySelector('#wcs-container').insertAdjacentHTML(
 
 ```html
 <!--
-  [source] public/index.html
+  [html] public/index.html
 --> 
   ...
   <link rel="stylesheet" href="../src/style.css">
@@ -255,7 +255,7 @@ document.querySelector('#wcs-container').insertAdjacentHTML(
 ### 3.2 javascript 코드
 
 ```js
-// [source] src/wiseCatSaying.js
+// [js] src/wiseCatSaying.js
 const wiseword = [
   {
     key: 1,
@@ -270,7 +270,7 @@ const wiseword = [
 - 사용법을 편리하게 하고자 js 파일의 갯수를 줄이기 위하여 기존 **명언사전(wiseword.js)** 을 `wiseCatSaying.js` 파일에 포함시킵니다.  
 
 ```js
-// [source] src/wiseCatSaying.js
+// [js] src/wiseCatSaying.js
 ...
 document.querySelector('#wcs-container').insertAdjacentHTML(
   'afterbegin',
